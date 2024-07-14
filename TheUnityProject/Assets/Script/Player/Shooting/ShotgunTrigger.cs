@@ -72,6 +72,16 @@ public class ShotgunTrigger : MonoBehaviour
             */
             //Debug.DrawRay(transform.position + (transform.forward * transform.localScale.z) / 1.5f, transform.forward + transform.right * UnityEngine.Random.Range(-0.2f, 0.2f) + transform.up * UnityEngine.Random.Range(-0.2f, 0.2f));
             BuckshotShoot();
+            /*
+            RaycastHit hit;
+            Vector3 spreadVector = transform.right * UnityEngine.Random.Range(-0.2f, 0.2f) + transform.up * UnityEngine.Random.Range(-0.2f, 0.2f);
+            Vector3 bulletDirection = transform.forward + spreadVector;
+            if (Physics.Raycast(transform.position + (transform.forward * transform.localScale.z) / 1.5f, bulletDirection, out hit, BS_Range)) // For origin, it's set to be right in front of the shotgun
+            {
+                Debug.DrawRay(transform.position + (transform.forward * transform.localScale.z) / 1.5f, bulletDirection, Color.yellow,1);
+                Debug.Log("Raycast hit");
+            }
+            */
         }
     }
     void Reload()
@@ -101,10 +111,10 @@ public class ShotgunTrigger : MonoBehaviour
                 
                 Vector3 spreadVector = transform.right * UnityEngine.Random.Range(-0.2f, 0.2f) + transform.up * UnityEngine.Random.Range(-0.2f, 0.2f);
                 Vector3 bulletDirection = transform.forward + spreadVector;
-                Debug.DrawRay(transform.position + (transform.forward * transform.localScale.z) / 1.5f, bulletDirection);
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position + (transform.forward * transform.localScale.z) / 1.5f, bulletDirection, out hit, BS_Range)) // For origin, it's set to be right in front of the shotgun
                 {
+                    Debug.DrawRay(transform.position + (transform.forward * transform.localScale.z) / 1.5f, bulletDirection, Color.yellow,1);
                     Debug.Log("Raycast hit");
                     if (hit.collider.gameObject.CompareTag("Enemy"))
                     {
