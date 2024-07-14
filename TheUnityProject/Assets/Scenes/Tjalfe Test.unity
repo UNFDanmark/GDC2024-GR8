@@ -706,7 +706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae79223c30abe8c4195577f6360d6fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeWeapon: {fileID: 0}
+  meleeWeapon: {fileID: 1985381389}
+  meeleeWeaponAnimator: {fileID: 1985381391}
   maxHealth: 20
   currentHealth: 20
   speed: 4

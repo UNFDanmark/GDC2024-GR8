@@ -1,0 +1,1 @@
+When starting the project in editor mode, there is a chance the player camera will be upside down. This ONLY happens in editor mode, due to a bug in the Unity engine. In order to prevent this, make sure your mouse isn't moving while pressing the play button.

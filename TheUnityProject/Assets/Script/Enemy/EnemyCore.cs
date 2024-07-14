@@ -16,6 +16,8 @@ public class EnemyCore : MonoBehaviour
     NavMeshAgent enemyAI;
     Transform playerTransform;
     public GameObject meleeWeapon;
+    public Animator meleeWeaponAnimator;
+    AnimatorStateInfo animInfo;
     
     // Added traits
     public int maxHealth = 10;
@@ -37,6 +39,7 @@ public class EnemyCore : MonoBehaviour
         currentHealth = maxHealth;
         enemyAI.speed = speed;
         enemyAI.destination = playerTransform.position;
+        animInfo = meleeWeaponAnimator.GetCurrentAnimatorStateInfo(0);
     }
 
     // Update is called once per frame
@@ -67,15 +70,18 @@ public class EnemyCore : MonoBehaviour
                 doingColourChange = false;
             }
         }
-
-        if ((playerTransform.position - transform.position).magnitude >= range)
+        /*
+        if ((playerTransform.position - transform.position).magnitude <= range && animInfo.length < 1)
         {
-            
+            Debug.Log("I'm in range!!!!");
+            MeleeAttack();
         }
+        */
     }
-
+    /*
     void MeleeAttack()
     {
-        
+        meleeWeaponAnimator.Play("MeleeAttack");
     }
+    */
 }
