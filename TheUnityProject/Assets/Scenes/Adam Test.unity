@@ -623,8 +623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae79223c30abe8c4195577f6360d6fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeWeapon: {fileID: 0}
-  meleeWeaponAnimator: {fileID: 0}
+  meleeWeapon: {fileID: 1001699240}
+  meleeWeaponAnimator: {fileID: 1001699242}
   maxHealth: 20
   currentHealth: 20
   speed: 4
@@ -1095,6 +1095,8 @@ MonoBehaviour:
   isRunning: 0
   jumpHeight: 2
   jumpEnable: 1
+  PLAYSOUND_Running: 0
+  PLAYSOUND_Walking: 0
 --- !u!136 &1241117537
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1337,6 +1339,8 @@ MonoBehaviour:
   BS_ShotgunBlastObject: {fileID: 1112733758}
   BS_BulletHitParticle: {fileID: 3410934234863709930, guid: 7186b5e618f5e254ab0e5e9c401f6aad,
     type: 3}
+  PLAYSOUND_BS_ShotgunShoot: 0
+  PLAYSOUND_ShotgunReload: 0
 --- !u!65 &1244891762
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -246,7 +246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &459638423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeWeapon: {fileID: 1985381389}
-  meeleeWeaponAnimator: {fileID: 1985381391}
+  meleeWeaponAnimator: {fileID: 1985381391}
   maxHealth: 20
   currentHealth: 20
   speed: 4
@@ -862,6 +862,8 @@ MonoBehaviour:
   BS_ShotgunBlastObject: {fileID: 1740857098}
   BS_BulletHitParticle: {fileID: 3410934234863709930, guid: 7186b5e618f5e254ab0e5e9c401f6aad,
     type: 3}
+  PLAYSOUND_BS_ShotgunShoot: 0
+  PLAYSOUND_ShotgunReload: 0
 --- !u!1 &1362273778
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +988,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 0.02
+  isWalking: 1
   runSpeed: 0.06
+  isRunning: 0
+  jumpHeight: 20
+  jumpEnable: 1
+  PLAYSOUND_Running: 0
+  PLAYSOUND_Walking: 0
 --- !u!143 &1362273786
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1311,7 +1319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1871106630}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

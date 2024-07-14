@@ -19,9 +19,12 @@ public class AudioController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerMovement.isWalking)
+        
+
+        if (PlayerObject.GetComponent<PlayerMovement>().PLAYSOUND_Walking || )
         {
             WalkingAudio.Play();
-        }
+            print("ur walki22n");
+        } 
     }
 }
