@@ -46,8 +46,7 @@ public class EnemyCore : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
+        
         enemyAI.speed = speed;
         enemyAI.destination = playerTransform.position;
 
@@ -65,17 +64,6 @@ public class EnemyCore : MonoBehaviour
                 enemyMAT.color = originalColor;
                 doingColourChange = false;
             }
-        }
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            lastTimerChecked = timer;
-            currentHealth--;
-            enemyMAT.color = new Color(1f,0.5f,0.5f);
-            
         }
     }
 }
