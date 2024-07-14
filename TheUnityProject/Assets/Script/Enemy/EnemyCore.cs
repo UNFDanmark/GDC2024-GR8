@@ -2,24 +2,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyCore : MonoBehaviour
 {
-    public int maxHealth = 10;
-    public int currentHealth = 10;
+    
     float timer;
     float lastTimerChecked;
+    
+    // Loaded objects
     Material enemyMAT;
     Color originalColor;
+    NavMeshAgent enemyAI;
+    Transform playerTransform;
+    
+    // Added traits
+    public int maxHealth = 10;
+    public int currentHealth;
+    public float speed = 0.1f;
+    
     bool doingColourChange = false;
-
-    public int speed = 1;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        currentHealth = maxHealth;
+        
+        // Load the objects
         enemyMAT = gameObject.GetComponent<MeshRenderer>().material;
         originalColor = enemyMAT.color;
+        enemyAI = gameObject.GetComponent<NavMeshAgent>();
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        
+        currentHealth = maxHealth;
+        enemyAI.speed = speed;
+        enemyAI.destination = playerTransform.position;
     }
 
     // Update is called once per frame
@@ -32,6 +47,10 @@ public class EnemyCore : MonoBehaviour
             Destroy(gameObject);
         }
 
+
+        enemyAI.speed = speed;
+        enemyAI.destination = playerTransform.position;
+
         if (enemyMAT.color != originalColor)
         {
             if (!doingColourChange)
@@ -43,7 +62,7 @@ public class EnemyCore : MonoBehaviour
             if (timer >= lastTimerChecked + 0.3f)
             {
                 Debug.Log("back  to normal");
-                gameObject.GetComponent<MeshRenderer>().material.color = originalColor;
+                enemyMAT.color = originalColor;
                 doingColourChange = false;
             }
         }
