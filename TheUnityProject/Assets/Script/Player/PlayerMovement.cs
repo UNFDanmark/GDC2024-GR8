@@ -46,18 +46,20 @@ public class PlayerMovement : MonoBehaviour
         */
 
         playerInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        
         jumpVector = new Vector3(playerInput.x, jumpHeight, playerInput.z);
-        jumpVector = new Vector3(0, jumpHeight, 0);
+        //jumpVector = new Vector3(0, jumpHeight, 0);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // TODO Wait for jump to finish b4 starting new jump
+            Jump();
+            jumpEnable = false;
+        }
 
     }
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // TODO Wait for jump to finish b4 starting new jump
-            Jump();
-        }
         
         if (playerInput.magnitude > 1)
         {
@@ -79,11 +81,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        jumpVector.y += jumpHeight;
         if (jumpEnable)
         {
-            // TODO Make player move with charactermover
-            controller.SimpleMove(jumpVector);
+            // TODO Fix jump (teleporting rn)
+            Debug.Log("JUMP");
+            Vector3 jump = transform.TransformDirection(jumpVector);
+            controller.Move(jump);
         }
     }
 }
