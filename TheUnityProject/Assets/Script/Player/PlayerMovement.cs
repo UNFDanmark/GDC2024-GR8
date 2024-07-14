@@ -5,24 +5,26 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Vector3 input;
-    private Rigidbody rb;
-    public float walkSpeed = 10;
-    public float runSpeed = 18;
-    private float speed = 10;
     private CharacterController controller;
-    private Vector3 playerInput;
+    
     // WALK RUN
+    public float walkSpeed = 10;
     public bool isWalking = true;
+    
+    public float runSpeed = 18;
     public bool isRunning = false;
+    
+    private Vector3 playerInput;
+    private float speed;
     
     // JUMP
     public float jumpHeight = 2;
     public bool jumpEnable = true;
     
+    private Vector3 jumpVector;
+    
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         controller = GetComponent<CharacterController>();
     }
 
@@ -44,11 +46,19 @@ public class PlayerMovement : MonoBehaviour
         */
 
         playerInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        jumpVector = new Vector3(playerInput.x, jumpHeight, playerInput.z);
+        jumpVector = new Vector3(0, jumpHeight, 0);
 
     }
 
     private void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // TODO Wait for jump to finish b4 starting new jump
+            Jump();
+        }
+        
         if (playerInput.magnitude > 1)
         {
             playerInput = playerInput.normalized;
@@ -69,11 +79,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        Vector3 jumpVector = rb.velocity;
         jumpVector.y += jumpHeight;
         if (jumpEnable)
         {
-            rb.velocity = jumpVector;
+            // TODO Make player move with charactermover
+            controller.SimpleMove(jumpVector);
         }
     }
 }
