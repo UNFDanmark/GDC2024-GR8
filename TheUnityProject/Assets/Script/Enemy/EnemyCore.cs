@@ -15,11 +15,13 @@ public class EnemyCore : MonoBehaviour
     Color originalColor;
     NavMeshAgent enemyAI;
     Transform playerTransform;
+    public GameObject meleeWeapon;
     
     // Added traits
     public int maxHealth = 10;
     public int currentHealth;
     public float speed = 0.1f;
+    public float range = 2;
     
     bool doingColourChange = false;
     // Start is called before the first frame update
@@ -65,5 +67,15 @@ public class EnemyCore : MonoBehaviour
                 doingColourChange = false;
             }
         }
+
+        if ((playerTransform.position - transform.position).magnitude >= range)
+        {
+            
+        }
+    }
+
+    void MeleeAttack()
+    {
+        
     }
 }
