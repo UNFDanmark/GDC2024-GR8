@@ -21,6 +21,9 @@ public class ShotgunTrigger : MonoBehaviour
     Material shotgunMaterial;
     Color defaultColor;
     public GameObject BS_BulletHitParticle;
+    
+    public bool PLAYSOUND_BS_ShotgunShoot; // Note til Adam: Denne her bool vil blive sat til true i ÉN frame, og kun én, hver gang spilleren skydder.
+    public bool PLAYSOUND_ShotgunReload;
 
     void Start()
     {
@@ -31,6 +34,9 @@ public class ShotgunTrigger : MonoBehaviour
 
     void Update()
     {
+        PLAYSOUND_BS_ShotgunShoot = false;
+        PLAYSOUND_ShotgunReload = false;
+        
         timer += Time.deltaTime;
         
         if (Input.GetKeyDown(KeyCode.R))
@@ -58,7 +64,7 @@ public class ShotgunTrigger : MonoBehaviour
 
     IEnumerator ResetReload()
     {
-        Debug.Log("Coroutine trigger");
+        PLAYSOUND_ShotgunReload = true;
         yield return new WaitForSeconds(reloadSpeed);
         isReloading = false;
         shotgunMaterial.color = defaultColor;
@@ -71,17 +77,18 @@ public class ShotgunTrigger : MonoBehaviour
         lastTimerTrigger = timer;
         if (BS_remainingAmmo > 0)
         {
+            PLAYSOUND_BS_ShotgunShoot = true;
             BS_ShotgunBlastObject.SetActive(true);
             BS_remainingAmmo--;
             for (int i = 0; i < BS_BulletCount; i++)
             {
-                Vector3 spreadVector = transform.right * UnityEngine.Random.Range(-0.3f, 0.3f) + transform.up * UnityEngine.Random.Range(-0.2f, 0.2f);
+                Vector3 spreadVector = transform.right * UnityEngine.Random.Range(-0.3f, 0.3f) + transform.up * UnityEngine.Random.Range(-0.3f, 0.3f);
                 Vector3 bulletDirection = transform.forward + spreadVector;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position + (transform.forward * transform.localScale.z) / 1.5f, bulletDirection, out hit, BS_Range)) // For origin, it's set to be right in front of the shotgun
                 {
                     Debug.DrawRay(transform.position + (transform.forward * transform.localScale.z) / 1.5f, bulletDirection, Color.yellow,1);
-                    Debug.Log("Raycast hit");
+                    Debug.Log("");
                     Instantiate(BS_BulletHitParticle, hit.collider.ClosestPoint(hit.point),new Quaternion(hit.normal.x,hit.normal.y,hit.normal.z,hit.collider.gameObject.transform.rotation.w),hit.collider.gameObject.transform); //Set parent to be enemy
                     if (hit.collider.gameObject.CompareTag("Enemy"))
                     {

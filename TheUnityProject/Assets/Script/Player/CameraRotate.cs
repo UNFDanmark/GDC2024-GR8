@@ -35,11 +35,12 @@ public class CameraRotate : MonoBehaviour
         }
         */
         transform.Rotate(-mouseY,0,0);
-
+        
         if (Vector3.Dot(transform.forward, new Vector3(0, 1, 0)) >= 0.9f || Vector3.Dot(transform.forward, new Vector3(0, 1, 0)) <= -0.9f)
         {
             transform.Rotate(mouseY,0,0);
         }
+        
         //Debug.Log("First dot: " + Vector3.Dot(transform.forward, new Vector3(0, 1, 0)));
         //Debug.Log("Second dot: " + Vector3.Dot(transform.forward, new Vector3(1, 0, 0)));
     }

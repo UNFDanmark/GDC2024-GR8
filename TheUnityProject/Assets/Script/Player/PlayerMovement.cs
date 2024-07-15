@@ -19,9 +19,11 @@ public class PlayerMovement : MonoBehaviour
     
     // JUMP
     public float jumpHeight = 2;
-    public bool jumpEnable = true;
     
     private Vector3 jumpVector;
+
+    public bool PLAYSOUND_Running;
+    public bool PLAYSOUND_Walking;
     
     void Start()
     {
@@ -30,37 +32,39 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        /*
-        isRunning = Input.GetKey(KeyCode.LeftShift);
-
-        if (isRunning) speed = runSpeed;
-        else speed = walkSpeed;
         
-        // PLayer shuold move using WASD
-        input = rb.velocity;
-        
-        input.x = Input.GetAxis("Horizontal") * speed * Time.deltaTime * 250;
-        input.z = Input.GetAxis("Vertical") * speed * Time.deltaTime * 250;
-
-        rb.velocity = input;
-        */
-
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            if (isRunning)
+            {
+                PLAYSOUND_Running = isRunning;
+            }
+            else
+            {
+                PLAYSOUND_Walking = isWalking;
+            }
+        }
+        else
+        {
+            PLAYSOUND_Walking = isWalking;
+            PLAYSOUND_Running = isRunning;
+        }
         playerInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         
         jumpVector = new Vector3(playerInput.x, jumpHeight, playerInput.z);
         //jumpVector = new Vector3(0, jumpHeight, 0);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
             // TODO Wait for jump to finish b4 starting new jump
             Jump();
-            jumpEnable = false;
         }
+        Debug.Log("Run: " + PLAYSOUND_Running);
+        Debug.Log("Walk: " + PLAYSOUND_Walking);
 
     }
 
     private void FixedUpdate()
     {
-        
         if (playerInput.magnitude > 1)
         {
             playerInput = playerInput.normalized;
@@ -68,25 +72,42 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 moveVector = transform.TransformDirection(playerInput);
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
         {
             isRunning = true;
             isWalking = false;
+            PLAYSOUND_Running = true;
+            PLAYSOUND_Walking = false;
+        }
+        else if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            isRunning = false;
+            isWalking = true;
+            PLAYSOUND_Running = false;
+            PLAYSOUND_Walking = true;
+        }
+        else
+        {
+            isRunning = false;
+            isWalking = false;
+            PLAYSOUND_Running = false;
+            PLAYSOUND_Walking = false;
         }
         if (isRunning) speed = runSpeed;
         else speed = walkSpeed;
 
         controller.SimpleMove( speed * 250 * moveVector);
+        
     }
 
     private void Jump()
     {
-        if (jumpEnable)
-        {
-            // TODO Fix jump (teleporting rn)
-            Debug.Log("JUMP");
-            Vector3 jump = transform.TransformDirection(jumpVector);
-            controller.Move(jump);
-        }
+        
+        // TODO Fix jump (teleporting rn)
+        // Note: Character controller has it's own rigidbody-like physics, use cc physics and custom gravity to simulate a rigidbody
+        Debug.Log("JUMP");
+        Vector3 jump = transform.TransformDirection(jumpVector);
+        controller.Move(jump);
+        
     }
 }
