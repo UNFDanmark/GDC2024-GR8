@@ -229,6 +229,94 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1001 &158596686
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.081725
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.002699
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6093592463355912122, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c1369f20cc017a47931bb1a270394ac, type: 2}
+    - target: {fileID: -4096120871940991593, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.404
+      objectReference: {fileID: 0}
+    - target: {fileID: -4096120871940991593, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_Name
+      value: 'ENEMY '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7339356831882890532, guid: 6cb46a4eef2879d4c86bbd8ac186daf7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c1369f20cc017a47931bb1a270394ac, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6cb46a4eef2879d4c86bbd8ac186daf7, type: 3}
 --- !u!1 &166876212
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +479,8 @@ MonoBehaviour:
   BS_ShotgunBlastObject: {fileID: 695648311}
   BS_BulletHitParticle: {fileID: 3410934234863709930, guid: 7186b5e618f5e254ab0e5e9c401f6aad,
     type: 3}
+  PLAYSOUND_BS_ShotgunShoot: 0
+  PLAYSOUND_ShotgunReload: 0
 --- !u!65 &353684434
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1120,7 +1210,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 0.02
+  isWalking: 1
+  canWalk: 1
+  PLAYSOUND_Walking: 0
   runSpeed: 0.06
+  isRunning: 0
+  canRun: 1
+  PLAYSOUND_Running: 0
+  dashSpeed: 20000
+  dashtime: 2
+  isDashing: 0
+  canDash: 1
+  PLAYSOUND_DASH: 0
+  jumpHeight: 2
+  canJump: 1
+  PLAYSOUND_Jump: 0
+  PLAYSOUND_JumpLand: 0
 --- !u!136 &1490658671
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1632,3 +1737,4 @@ SceneRoots:
   - {fileID: 1917952214}
   - {fileID: 1501114581}
   - {fileID: 587635695}
+  - {fileID: 158596686}
