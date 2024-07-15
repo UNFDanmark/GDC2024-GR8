@@ -1,113 +1,111 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
-    
+    Rigidbody rb;
+    Collider playerCollider;
+    float timer;
     // WALK RUN
-    public float walkSpeed = 10;
+    Vector3 moveVector;
+    public float walkSpeed = 2000;
     public bool isWalking = true;
-    
-    public float runSpeed = 18;
-    public bool isRunning = false;
-    
-    private Vector3 playerInput;
-    private float speed;
-    
-    // JUMP
-    public float jumpHeight = 2;
-    
-    private Vector3 jumpVector;
-
-    public bool PLAYSOUND_Running;
+    public bool canWalk = true;
     public bool PLAYSOUND_Walking;
     
+    public float runSpeed = 3600;
+    public bool isRunning = false;
+    public bool canRun = true;
+    public bool PLAYSOUND_Running;
+    
+    private float speed;
+    // DASH
+    public float dashSpeed = 20000;
+    public float dashtime = 2;
+    public bool isDashing = false;
+    public bool canDash = true;
+    public bool PLAYSOUND_DASH;
+    private float dashTimer = 0;
+    // JUMP
+    Vector3 jumpVector;
+    public float jumpHeight = 2;
+    public bool canJump = true;
+    public bool PLAYSOUND_Jump;
+    public bool PLAYSOUND_JumpLand;
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
+        playerCollider = GetComponent<Collider>();
     }
 
+    void ResetSounds()
+    {
+        PLAYSOUND_Jump = false;
+        PLAYSOUND_Running = false;
+        PLAYSOUND_Walking = false;
+        PLAYSOUND_JumpLand = false;
+        PLAYSOUND_DASH = false;
+    }
     void Update()
     {
+        timer += Time.deltaTime;
+        ResetSounds();
         
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash && !isDashing)
         {
-            if (isRunning)
-            {
-                PLAYSOUND_Running = isRunning;
-            }
-            else
-            {
-                PLAYSOUND_Walking = isWalking;
-            }
+            dashTimer = timer;
+            isDashing = true;
+            PLAYSOUND_DASH = true;
+            speed = dashSpeed;
         }
-        else
+
+        if (dashTimer + dashtime < timer)
         {
-            PLAYSOUND_Walking = isWalking;
-            PLAYSOUND_Running = isRunning;
+            isDashing = false;
         }
-        playerInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         
-        jumpVector = new Vector3(playerInput.x, jumpHeight, playerInput.z);
-        //jumpVector = new Vector3(0, jumpHeight, 0);
-        if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
-        {
-            // TODO Wait for jump to finish b4 starting new jump
-            Jump();
-        }
-        Debug.Log("Run: " + PLAYSOUND_Running);
-        Debug.Log("Walk: " + PLAYSOUND_Walking);
-
-    }
-
-    private void FixedUpdate()
-    {
-        if (playerInput.magnitude > 1)
-        {
-            playerInput = playerInput.normalized;
-        }
-
-        Vector3 moveVector = transform.TransformDirection(playerInput);
-
-        if (Input.GetKey(KeyCode.LeftShift) && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
+        if (Input.GetKey(KeyCode.LeftShift) && canRun && !isDashing)
         {
             isRunning = true;
-            isWalking = false;
             PLAYSOUND_Running = true;
-            PLAYSOUND_Walking = false;
+            speed = runSpeed;
         }
-        else if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        else if (!isDashing)
         {
-            isRunning = false;
-            isWalking = true;
-            PLAYSOUND_Running = false;
             PLAYSOUND_Walking = true;
+            speed = walkSpeed;
         }
-        else
-        {
-            isRunning = false;
-            isWalking = false;
-            PLAYSOUND_Running = false;
-            PLAYSOUND_Walking = false;
-        }
-        if (isRunning) speed = runSpeed;
-        else speed = walkSpeed;
 
-        controller.SimpleMove( speed * 250 * moveVector);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+        
+        // WALK RUN FORCE
+        moveVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        moveVector = transform.TransformDirection(moveVector);
+        moveVector = speed * Time.deltaTime * moveVector;
+        moveVector.y = rb.velocity.y;
+        if (canWalk) rb.velocity = moveVector;
+        
+        Debug.DrawRay(transform.position,moveVector,Color.red,0.5f);
         
     }
-
-    private void Jump()
+    void Jump()
     {
-        
-        // TODO Fix jump (teleporting rn)
-        // Note: Character controller has it's own rigidbody-like physics, use cc physics and custom gravity to simulate a rigidbody
-        Debug.Log("JUMP");
-        Vector3 jump = transform.TransformDirection(jumpVector);
-        controller.Move(jump);
-        
+        RaycastHit hit;
+        if (canJump && Physics.Raycast(transform.position,-transform.up, out hit,1.3f))
+        {
+            Debug.Log(hit.collider.gameObject.name);
+            Debug.DrawRay(transform.position,-transform.up, Color.blue,3);
+            if (hit.collider.gameObject.CompareTag("Ground"))
+            {
+                // JUMP FORCE
+                jumpVector = new Vector3(0, jumpHeight, 0);
+                rb.velocity += jumpVector;
+
+            }
+        }
     }
 }
