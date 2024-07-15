@@ -8,11 +8,14 @@ public class AudioController : MonoBehaviour
     [SerializeField] private GameObject PlayerObject;
     private bool WalkSoundHasPlayed = false;
     private CharacterController PlayerController;
-    public AudioClip[] clipList;
+    public AudioClip[] clipListPlayer;
+    
     // 1. Footstep 
     // 2. Footstep
     // 3. Footstep
 
+    //public AudioClip[] cliplistEnemy;
+    
     private AudioSource WalkingAudio;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +33,7 @@ public class AudioController : MonoBehaviour
     {
 
         
-        if (playerMovement.isRunning)
+        if (playerMovement.PLAYSOUND_Running)
         {
             WalkingAudio.pitch = Random.Range(1.6f, 1.8f); // pitch for variation
             WalkingAudio.volume = Random.Range(0.07f, 0.09f); // Volume for Variation 
@@ -41,16 +44,16 @@ public class AudioController : MonoBehaviour
             WalkingAudio.volume = Random.Range(0.03f, 0.05f); // Volume for Variation 
         }
         
-        if (PlayerController.velocity.z != 0 && PlayerController.velocity.x != 0 && WalkSoundHasPlayed == false)
+        if (PlayerController.velocity.z != 0 && PlayerController.velocity.x != 0 && WalkSoundHasPlayed == false && PlayerController.isGrounded)
         {
 
-            WalkingAudio.clip = clipList[Random.Range(0, clipList.Length)]; 
+            WalkingAudio.clip = clipListPlayer[Random.Range(0, clipListPlayer.Length)]; 
             // Inserts a random clip from list into player audio source
             
             print("paasdsadsadasd");
 
 
-            if (playerMovement.isWalking)
+            if (playerMovement.PLAYSOUND_Walking)
             {
                 WalkingAudio.Play();
                 print("pluh");
@@ -73,9 +76,13 @@ public class AudioController : MonoBehaviour
             WalkingAudio.Stop();
             WalkSoundHasPlayed = false;
         }
+
+        if (PlayerController.isGrounded == false)
         {
-          
+            WalkingAudio.Stop();
         }
+          
+        
 
         
         
