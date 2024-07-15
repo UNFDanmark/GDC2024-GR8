@@ -82,17 +82,15 @@ public class ShotgunTrigger : MonoBehaviour
             BS_remainingAmmo--;
             for (int i = 0; i < BS_BulletCount; i++)
             {
-                Vector3 spreadVector = transform.right * UnityEngine.Random.Range(-0.3f, 0.3f) + transform.up * UnityEngine.Random.Range(-0.3f, 0.3f);
+                Vector3 spreadVector = transform.right * UnityEngine.Random.Range(-0.35f, 0.35f) + transform.up * UnityEngine.Random.Range(-0.35f, 0.35f);
                 Vector3 bulletDirection = transform.forward + spreadVector;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position + (transform.forward * transform.localScale.z) / 1.5f, bulletDirection, out hit, BS_Range)) // For origin, it's set to be right in front of the shotgun
                 {
                     Debug.DrawRay(transform.position + (transform.forward * transform.localScale.z) / 1.5f, bulletDirection, Color.yellow,1);
-                    Debug.Log("");
                     Instantiate(BS_BulletHitParticle, hit.collider.ClosestPoint(hit.point),new Quaternion(hit.normal.x,hit.normal.y,hit.normal.z,hit.collider.gameObject.transform.rotation.w),hit.collider.gameObject.transform); //Set parent to be enemy
                     if (hit.collider.gameObject.CompareTag("Enemy"))
                     {
-                        Debug.Log("Enemy hit");
                         EnemyCore enemy = hit.collider.gameObject.GetComponent<EnemyCore>();
                         enemy.currentHealth--;
                         enemy.gameObject.GetComponent<MeshRenderer>().material.color = new Color(1f,0.5f,0.5f);

@@ -65,7 +65,6 @@ public class EnemyCore : MonoBehaviour
             
             if (timer >= lastTimerChecked + 0.3f)
             {
-                Debug.Log("back  to normal");
                 enemyMAT.color = originalColor;
                 doingColourChange = false;
             }
