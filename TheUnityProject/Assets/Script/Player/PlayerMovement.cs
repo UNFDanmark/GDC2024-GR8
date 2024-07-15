@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     
     // JUMP
     public float jumpHeight = 2;
-    public bool jumpEnable = true;
     
     private Vector3 jumpVector;
 
@@ -54,11 +53,10 @@ public class PlayerMovement : MonoBehaviour
         
         jumpVector = new Vector3(playerInput.x, jumpHeight, playerInput.z);
         //jumpVector = new Vector3(0, jumpHeight, 0);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
             // TODO Wait for jump to finish b4 starting new jump
             Jump();
-            jumpEnable = false;
         }
         Debug.Log("Run: " + PLAYSOUND_Running);
         Debug.Log("Walk: " + PLAYSOUND_Walking);
@@ -104,12 +102,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (jumpEnable)
-        {
-            // TODO Fix jump (teleporting rn)
-            Debug.Log("JUMP");
-            Vector3 jump = transform.TransformDirection(jumpVector);
-            controller.Move(jump);
-        }
+        
+        // TODO Fix jump (teleporting rn)
+        // Note: Character controller has it's own rigidbody-like physics, use cc physics and custom gravity to simulate a rigidbody
+        Debug.Log("JUMP");
+        Vector3 jump = transform.TransformDirection(jumpVector);
+        controller.Move(jump);
+        
     }
 }
