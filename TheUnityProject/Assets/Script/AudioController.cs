@@ -51,12 +51,12 @@ public class AudioController : MonoBehaviour
         if (playerMovement.PLAYSOUND_Running)
         {
             PlayerAudioSource.pitch = Random.Range(1.6f, 1.8f); // pitch for variation
-            PlayerAudioSource.volume = Random.Range(0.07f, 0.09f); // Volume for Variation 
+            PlayerAudioSource.volume = Random.Range(0.14f, 0.18f); // Volume for Variation 
         }
         else
         {
             PlayerAudioSource.pitch = Random.Range(1.2f, 1.4f); // pitch for variation
-            PlayerAudioSource.volume = Random.Range(0.03f, 0.05f); // Volume for Variation 
+            PlayerAudioSource.volume = Random.Range(0.1f, 0.13f); // Volume for Variation 
         }
         
         
