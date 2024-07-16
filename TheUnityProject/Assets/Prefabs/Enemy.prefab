@@ -127,7 +127,7 @@ MonoBehaviour:
   maxHealth: 3
   currentHealth: 3
   speed: 4
-  range: 2
+  range: 10
 --- !u!195 &1477526803124395079
 NavMeshAgent:
   m_ObjectHideFlags: 0

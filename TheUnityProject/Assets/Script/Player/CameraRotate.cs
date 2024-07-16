@@ -17,7 +17,7 @@ public class CameraRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity * Time.deltaTime;
+        mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity;
 
         //Debug.Log("First statement: " + !(transform.rotation.x <= -90) + "   Second statement: " + !(transform.rotation.x >= 90));
         //Debug.Log(transform.localEulerAngles);

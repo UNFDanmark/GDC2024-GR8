@@ -56,7 +56,15 @@ public class EnemyCore : MonoBehaviour
         }
         
         enemyAI.speed = speed;
-        enemyAI.destination = playerTransform.position;
+        if ((playerTransform.position - transform.position).magnitude <= range)
+        {
+            enemyAI.destination = transform.position;
+            transform.Rotate(playerTransform.position - transform.position);
+        }
+        else
+        {
+            enemyAI.destination = playerTransform.position;
+        }
 
         if (enemyMAT.color != originalColor)
         {

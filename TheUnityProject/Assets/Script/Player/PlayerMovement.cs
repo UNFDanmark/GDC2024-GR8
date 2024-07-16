@@ -143,14 +143,23 @@ public class PlayerMovement : MonoBehaviour
         }
         
         // WALK RUN FORCE
-        moveVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (moveVector.magnitude >= 1)
+        {
+            moveVector = moveVector.normalized;
+        }
+        
+        
+    }
+
+    void FixedUpdate()
+    {
         moveVector = transform.TransformDirection(moveVector);
-        moveVector = speed * Time.deltaTime * moveVector;
+        moveVector = speed * moveVector;
         moveVector.y = rb.velocity.y;
         if (canWalk) rb.velocity = moveVector;
         
         Debug.DrawRay(transform.position,moveVector,Color.red,0.5f);
-        
     }
 
     /*
