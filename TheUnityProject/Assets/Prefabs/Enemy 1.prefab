@@ -306,8 +306,8 @@ MonoBehaviour:
   - {fileID: 7667709396671916861}
   enemyMATS: []
   enemyAnimator: {fileID: 8591695178500902097}
-  maxHealth: 20
-  currentHealth: 20
+  maxHealth: 10
+  currentHealth: 10
   speed: 13
   range: 5
   damage: 9

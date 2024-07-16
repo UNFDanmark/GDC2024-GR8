@@ -25,9 +25,9 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        if (playerDied && Input.GetKeyDown(KeyCode.R))
+        if (playerDied && Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene("Tjalfe Test");
+            SceneManager.LoadScene("Main Menu");
         }
         healthBarSliderScale = playerHealth / playerMaxHealth;
         staminaBarSliderScale = playerStamina / playerMaxStamina;
