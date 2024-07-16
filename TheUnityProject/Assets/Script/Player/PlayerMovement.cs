@@ -68,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(Time.deltaTime);
         timer += Time.deltaTime;
         ResetSounds();
         if (speed == walkSpeed)
@@ -193,7 +192,6 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (canJump && Physics.Raycast(transform.position,-transform.up, out hit,1.3f))
         {
-            Debug.Log(hit.collider.gameObject.name);
             Debug.DrawRay(transform.position,-transform.up, Color.blue,3);
             if (hit.collider.gameObject.CompareTag("Ground"))
             {

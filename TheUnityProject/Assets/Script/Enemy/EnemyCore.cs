@@ -9,6 +9,7 @@ public class EnemyCore : MonoBehaviour
     
     float timer;
     float lastTimerChecked;
+    Killstreak killStreak;
     
     // Loaded objects
     Material enemyMAT;
@@ -35,6 +36,7 @@ public class EnemyCore : MonoBehaviour
         originalColor = enemyMAT.color;
         enemyAI = gameObject.GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        killStreak = GameObject.FindWithTag("Player").GetComponent<Killstreak>();
         
         currentHealth = maxHealth;
         enemyAI.speed = speed;
@@ -49,6 +51,7 @@ public class EnemyCore : MonoBehaviour
         
         if (currentHealth <= 0)
         {
+            killStreak.Kill();
             Destroy(gameObject);
         }
         
