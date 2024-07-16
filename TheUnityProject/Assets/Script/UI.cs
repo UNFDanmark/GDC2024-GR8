@@ -6,7 +6,11 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
     private PlayerHealth playerHealth;
-    private GameObject healthBar, staminaBar;
+    private GameObject 
+        healthBar, 
+        staminaBar,
+        ammo1,
+        ammo2;
     private Slider healthSlider, staminaSlider;
     public Gradient gradient;
     
@@ -15,6 +19,9 @@ public class UI : MonoBehaviour
         playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
         healthBar = GameObject.FindWithTag("HealthBar");
         staminaBar = GameObject.FindWithTag("StaminaBar");
+        ammo1 = GameObject.FindWithTag("ammo1");
+        ammo1 = GameObject.FindWithTag("ammo2");
+        
         healthSlider = healthBar.GetComponent<Slider>();
         staminaSlider = staminaBar.GetComponent<Slider>();
     }
