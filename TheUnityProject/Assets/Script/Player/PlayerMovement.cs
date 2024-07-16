@@ -48,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canJump = true;
     public bool PLAYSOUND_Jump;
     public bool PLAYSOUND_JumpLand;
+    public bool isGrounded = true;
     
     
     void Start()
@@ -128,16 +129,36 @@ public class PlayerMovement : MonoBehaviour
             isRunning = false;
             speed = walkSpeed;
 
-            fovTimer = (timer-fovTimer2)/fovChangeTime;
+            fovTimer = (timer - fovTimer2) / fovChangeTime;
             lastFOV = camera.fieldOfView;
             if (fovTimer > 1)
             {
                 fovTimer2 = timer;
             }
+
             lastFOV = camera.fieldOfView;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        RaycastHit hot;
+        if (Physics.Raycast(transform.position,-transform.up, out hot,1.3f))
+        {
+            if (hot.collider.gameObject.CompareTag("Ground"))
+            {
+                isGrounded = true;
+            }
+            else
+            {
+                // If ray hits something else than ground
+                isGrounded = false;
+            }
+        }
+        else
+        {
+            // If ray hits nothing
+            isGrounded = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
         }
@@ -205,16 +226,14 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         RaycastHit hit;
-        if (canJump && Physics.Raycast(transform.position,-transform.up, out hit,1.3f))
+        if (isGrounded)
         {
             Debug.DrawRay(transform.position,-transform.up, Color.blue,3);
-            if (hit.collider.gameObject.CompareTag("Ground"))
-            {
-                // JUMP FORCE
-                jumpVector = new Vector3(0, jumpHeight, 0);
-                rb.velocity += jumpVector;
-
-            }
+            // JUMP FORCE
+            jumpVector = new Vector3(0, jumpHeight, 0);
+            rb.velocity += jumpVector;
+        
+            
         }
     }
 }
