@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Enemy
   - Ground
+  - ScoreText
+  - StreakText
   layers:
   - Default
   - TransparentFX
