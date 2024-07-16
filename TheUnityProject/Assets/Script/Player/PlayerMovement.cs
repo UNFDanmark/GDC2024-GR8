@@ -157,7 +157,13 @@ public class PlayerMovement : MonoBehaviour
         moveVector = transform.TransformDirection(moveVector);
         moveVector = speed * moveVector;
         moveVector.y = rb.velocity.y;
-        if (canWalk) rb.velocity = moveVector;
+
+        moveVector.y -= transform.position.y * 0.01f; // Fix dash into enemy jump takes too long to fall down again (kinda fix only)
+        
+        
+        rb.velocity = moveVector;
+
+        
         
         Debug.DrawRay(transform.position,moveVector,Color.red,0.5f);
     }

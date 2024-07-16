@@ -19,11 +19,13 @@ public class EnemyCore : MonoBehaviour
     AnimatorStateInfo animInfo;
     public Animator enemyAnimator;
     
+    
     // Added traits
     public int maxHealth = 10;
     public int currentHealth;
     public float speed = 0.1f;
     public float range = 2;
+    public float damage = 5;
     
     bool doingColourChange = false;
     // Start is called before the first frame update
