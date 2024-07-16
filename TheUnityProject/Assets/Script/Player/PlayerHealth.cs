@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     // Health
-    public float playerMaxHealth = 20;
+    public float playerMaxHealth = 100;
     public float playerHealth;
     public float healthBarSliderScale = 1;
     private bool playerDied;
     // Stamina
-    public float playerMaxStamina = 10;
+    public float playerMaxStamina = 100;
     public float playerStamina;
     public float staminaBarSliderScale = 1;
     // Objects
