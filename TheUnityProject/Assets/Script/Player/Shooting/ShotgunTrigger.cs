@@ -7,7 +7,6 @@ using Random = System.Random;
 
 public class ShotgunTrigger : MonoBehaviour
 {
-    public GameObject BS_BulletPrefab;
     public int BS_BulletCount = 8;
     public float BS_Range = 0.3f;
     int BS_remainingAmmo = 2;
@@ -16,9 +15,6 @@ public class ShotgunTrigger : MonoBehaviour
     float timer;
     float lastTimerTrigger = 0;
     
-    GameObject shotgunObject;
-    Material shotgunMaterial;
-    Color defaultColor;
     public GameObject BS_BulletHitParticle;
     public GameObject BS_ShotgunBlastObject;
     
@@ -27,9 +23,6 @@ public class ShotgunTrigger : MonoBehaviour
 
     void Start()
     {
-        shotgunObject = GameObject.FindGameObjectWithTag("Shotgun");
-        shotgunMaterial = shotgunObject.GetComponent<MeshRenderer>().material;
-        defaultColor = shotgunMaterial.color;
     }
 
     void Update()
@@ -60,7 +53,6 @@ public class ShotgunTrigger : MonoBehaviour
     }
     void Reload()
     {
-        shotgunMaterial.color = new Color(0,0,0,255);
         StartCoroutine("ResetReload");
     }
 
@@ -69,7 +61,6 @@ public class ShotgunTrigger : MonoBehaviour
         PLAYSOUND_ShotgunReload = true;
         yield return new WaitForSeconds(reloadSpeed);
         isReloading = false;
-        shotgunMaterial.color = defaultColor;
         BS_remainingAmmo = 2;
     }
 
