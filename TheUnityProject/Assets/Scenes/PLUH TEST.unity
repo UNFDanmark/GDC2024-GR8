@@ -1345,6 +1345,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
         type: 3}
+      propertyPath: PlayerObject
+      value: 
+      objectReference: {fileID: 1362273778}
+    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
+        type: 3}
       propertyPath: clipListPlayer.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -1352,7 +1357,7 @@ PrefabInstance:
         type: 3}
       propertyPath: clipListPlayer.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: 822e52d3e0718b541a2a1301a0d576be, type: 3}
+      objectReference: {fileID: 8300000, guid: ff1b7d999baccc445b93e80f51506cf0, type: 3}
     - target: {fileID: 7438273013698880781, guid: ccc79f696502fb948bf028210b88481f,
         type: 3}
       propertyPath: m_Name
