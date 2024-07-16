@@ -15,12 +15,12 @@ public class ShotgunTrigger : MonoBehaviour
     bool isReloading = false;
     float timer;
     float lastTimerTrigger = 0;
-
-    public GameObject BS_ShotgunBlastObject;
+    
     GameObject shotgunObject;
     Material shotgunMaterial;
     Color defaultColor;
     public GameObject BS_BulletHitParticle;
+    public GameObject BS_ShotgunBlastObject;
     
     public bool PLAYSOUND_BS_ShotgunShoot; // Note til Adam: Denne her bool vil blive sat til true i ÉN frame, og kun én, hver gang spilleren skydder.
     public bool PLAYSOUND_ShotgunReload;
@@ -51,10 +51,12 @@ public class ShotgunTrigger : MonoBehaviour
         {
             BuckshotShoot();
         }
+        /*
         else if (timer >= lastTimerTrigger + 0.15f)
         {
             BS_ShotgunBlastObject.SetActive(false);
         }
+        */
     }
     void Reload()
     {
@@ -78,7 +80,7 @@ public class ShotgunTrigger : MonoBehaviour
         if (BS_remainingAmmo > 0)
         {
             PLAYSOUND_BS_ShotgunShoot = true;
-            BS_ShotgunBlastObject.SetActive(true);
+            Instantiate(BS_ShotgunBlastObject, transform.position + (transform.forward * transform.localScale.z),Quaternion.LookRotation(transform.forward,transform.up));
             BS_remainingAmmo--;
             for (int i = 0; i < BS_BulletCount; i++)
             {
