@@ -8,8 +8,6 @@ TagManager:
   - Bullet
   - Enemy
   - Ground
-  - HealthBar
-  - StaminaBar
   layers:
   - Default
   - TransparentFX

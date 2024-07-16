@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,21 +7,22 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
     private PlayerHealth playerHealth;
-    private GameObject 
-        healthBar, 
+    public ShotgunTrigger shotgunScript;
+
+    public GameObject
+        healthBar,
         staminaBar,
-        ammo1,
-        ammo2;
+        ammo1Trans,
+        ammo1Opaque,
+        ammo2Trans,
+        ammo2Opaque;
+
     private Slider healthSlider, staminaSlider;
-    public Gradient gradient;
+    
     
     void Start()
     {
         playerHealth = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
-        healthBar = GameObject.FindWithTag("HealthBar");
-        staminaBar = GameObject.FindWithTag("StaminaBar");
-        ammo1 = GameObject.FindWithTag("ammo1");
-        ammo1 = GameObject.FindWithTag("ammo2");
         
         healthSlider = healthBar.GetComponent<Slider>();
         staminaSlider = staminaBar.GetComponent<Slider>();
@@ -28,6 +30,21 @@ public class UI : MonoBehaviour
 
     void Update()
     {
+        if (shotgunScript.BS_remainingAmmo == 2)
+        {
+            ammo1Opaque.SetActive(true);
+            ammo2Opaque.SetActive(true);
+        }
+        if (shotgunScript.BS_remainingAmmo == 1)
+        {
+            ammo1Opaque.SetActive(false);
+            ammo2Opaque.SetActive(true);
+        }
+        if (shotgunScript.BS_remainingAmmo == 0)
+        {
+            ammo1Opaque.SetActive(false);
+            ammo2Opaque.SetActive(false);
+        }
         healthSlider.value = playerHealth.healthBarSliderScale;
         staminaSlider.value = playerHealth.staminaBarSliderScale;
 

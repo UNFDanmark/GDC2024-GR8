@@ -9,7 +9,7 @@ public class ShotgunTrigger : MonoBehaviour
 {
     public int BS_BulletCount = 8;
     public float BS_Range = 0.3f;
-    int BS_remainingAmmo = 2;
+    public int BS_remainingAmmo = 2;
     public float reloadSpeed = 2; // In seconds
     bool isReloading = false;
     float timer;
