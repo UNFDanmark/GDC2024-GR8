@@ -481,9 +481,9 @@ MonoBehaviour:
   BS_BulletCount: 18
   BS_Range: 13
   reloadSpeed: 2
-  BS_ShotgunBlastObject: {fileID: 695648311}
   BS_BulletHitParticle: {fileID: 3410934234863709930, guid: 7186b5e618f5e254ab0e5e9c401f6aad,
     type: 3}
+  BS_ShotgunBlastObject: {fileID: 695648311}
   PLAYSOUND_BS_ShotgunShoot: 0
   PLAYSOUND_ShotgunReload: 0
 --- !u!65 &353684434
@@ -894,6 +894,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 034daf63f52034a4ab02fb01f5a487ee, type: 2}
     - target: {fileID: -5215299815803115452, guid: bdfb42b6b39f06849bbd89c75b4212b7,
         type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5215299815803115452, guid: bdfb42b6b39f06849bbd89c75b4212b7,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 034daf63f52034a4ab02fb01f5a487ee, type: 2}
@@ -1214,19 +1219,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3f8a3f7f181be41b337a1ca3cd4ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraObject: {fileID: 0}
+  fovChangeTime: 1
+  walkSettings: ----------------
   walkSpeed: 0.02
+  walkFOV: 10
   isWalking: 1
   canWalk: 1
   PLAYSOUND_Walking: 0
+  runSettings: ----------------
   runSpeed: 0.06
+  runFOV: 10
   isRunning: 0
   canRun: 1
   PLAYSOUND_Running: 0
+  dashSettings: ----------------
   dashSpeed: 20000
+  dashFOV: 10
   dashtime: 2
   isDashing: 0
   canDash: 1
   PLAYSOUND_DASH: 0
+  jumpSettings: ----------------
   jumpHeight: 2
   canJump: 1
   PLAYSOUND_Jump: 0
