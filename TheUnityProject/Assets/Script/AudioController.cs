@@ -6,17 +6,21 @@ public class AudioController : MonoBehaviour
 {
     private PlayerMovement playerMovement;
     [SerializeField] private GameObject PlayerObject;
+    private GameObject Shotgun;
     private bool WalkSoundHasPlayed = false;
-    private CharacterController PlayerController;
     public AudioClip[] clipListPlayer;
-    
+    public AudioClip[] clipListShotgun;
+
+    private Rigidbody PlayerRB;
     // 1. Footstep 
     // 2. Footstep
     // 3. Footstep
 
-    //public AudioClip[] cliplistEnemy;
     
-    private AudioSource WalkingAudio;
+    
+    private AudioSource PlayerAudioSource;
+
+    private AudioSource ShotgunAudioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,30 +28,44 @@ public class AudioController : MonoBehaviour
       
         PlayerObject = GameObject.FindWithTag("Player");
         playerMovement = PlayerObject.GetComponent<PlayerMovement>();
-        WalkingAudio = PlayerObject.GetComponent<AudioSource>();
-        PlayerController = PlayerObject.GetComponent<CharacterController>();
+        PlayerAudioSource = PlayerObject.GetComponent<AudioSource>();
+        Shotgun = GameObject.FindWithTag("Shotgun");
+        PlayerRB = PlayerObject.GetComponent<Rigidbody>();
+        ShotgunAudioSource = Shotgun.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
+        if (Shotgun.GetComponent<ShotgunTrigger>().PLAYSOUND_BS_ShotgunShoot)
+        {
+
+            
+            ShotgunAudioSource.PlayOneShot(clipListShotgun[0]);
+            print("shotgun just boomed");
+
+        }
+        
         
         if (playerMovement.PLAYSOUND_Running)
         {
-            WalkingAudio.pitch = Random.Range(1.6f, 1.8f); // pitch for variation
-            WalkingAudio.volume = Random.Range(0.07f, 0.09f); // Volume for Variation 
+            PlayerAudioSource.pitch = Random.Range(1.6f, 1.8f); // pitch for variation
+            PlayerAudioSource.volume = Random.Range(0.14f, 0.18f); // Volume for Variation 
         }
         else
         {
-            WalkingAudio.pitch = Random.Range(1.2f, 1.4f); // pitch for variation
-            WalkingAudio.volume = Random.Range(0.03f, 0.05f); // Volume for Variation 
+            PlayerAudioSource.pitch = Random.Range(1.2f, 1.4f); // pitch for variation
+            PlayerAudioSource.volume = Random.Range(0.1f, 0.13f); // Volume for Variation 
         }
         
-        if (PlayerController.velocity.z != 0 && PlayerController.velocity.x != 0 && WalkSoundHasPlayed == false && PlayerController.isGrounded)
+        
+        
+        
+        if (PlayerRB.velocity.z != 0 && PlayerRB.velocity.x != 0 && WalkSoundHasPlayed == false)
         {
 
-            WalkingAudio.clip = clipListPlayer[Random.Range(0, clipListPlayer.Length)]; 
+            PlayerAudioSource.clip = clipListPlayer[Random.Range(0, clipListPlayer.Length)]; 
             // Inserts a random clip from list into player audio source
             
             print("paasdsadsadasd");
@@ -55,14 +73,14 @@ public class AudioController : MonoBehaviour
 
             if (playerMovement.PLAYSOUND_Walking)
             {
-                WalkingAudio.Play();
+                PlayerAudioSource.Play();
                 print("pluh");
                 WalkSoundHasPlayed = true;
 
             }
             else
             {
-                WalkingAudio.Play();
+                PlayerAudioSource.Play();
                 print("pluh");
                 WalkSoundHasPlayed = true;
             }
@@ -71,18 +89,16 @@ public class AudioController : MonoBehaviour
             
             
         }
-        else if (PlayerController.velocity.z == 0 || PlayerController.velocity.x == 0)
+        else if (PlayerRB.velocity.z == 0 || PlayerRB.velocity.x == 0)
         {
-            WalkingAudio.Stop();
+            PlayerAudioSource.Stop();
             WalkSoundHasPlayed = false;
         }
 
-        if (PlayerController.isGrounded == false)
+        if (playerMovement.isGrounded == false)
         {
-            WalkingAudio.Stop();
+            PlayerAudioSource.Stop();
         }
-          
-        
 
         
         

@@ -319,7 +319,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -429,7 +429,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -623,12 +623,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae79223c30abe8c4195577f6360d6fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeWeapon: {fileID: 1001699240}
-  meleeWeaponAnimator: {fileID: 1001699242}
+  enemyModels: []
+  enemyMATS: []
+  enemyAnimator: {fileID: 0}
   maxHealth: 20
   currentHealth: 20
   speed: 4
   range: 2
+  damage: 5
 --- !u!136 &901235441
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1089,14 +1091,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3f8a3f7f181be41b337a1ca3cd4ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraObject: {fileID: 0}
+  fovChangeTime: 1
+  walkSettings: ----------------
   walkSpeed: 0.02
+  walkFOV: 10
   isWalking: 1
-  runSpeed: 0.06
-  isRunning: 0
-  jumpHeight: 2
-  jumpEnable: 1
-  PLAYSOUND_Running: 0
+  canWalk: 1
   PLAYSOUND_Walking: 0
+  runSettings: ----------------
+  runSpeed: 0.06
+  runFOV: 10
+  isRunning: 0
+  canRun: 1
+  PLAYSOUND_Running: 0
+  dashSettings: ----------------
+  dashSpeed: 20000
+  dashFOV: 10
+  dashtime: 2
+  isDashing: 0
+  canDash: 1
+  PLAYSOUND_DASH: 0
+  jumpSettings: ----------------
+  jumpHeight: 2
+  canJump: 1
+  PLAYSOUND_Jump: 0
+  PLAYSOUND_JumpLand: 0
+  isGrounded: 1
 --- !u!136 &1241117537
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1140,7 +1161,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1331,14 +1352,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ef6f3c0ede92f46bd35a20b9551baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BS_BulletPrefab: {fileID: 912060555340187641, guid: 0067258a89f88a444870e7bd875c4542,
-    type: 3}
   BS_BulletCount: 18
   BS_Range: 13
   reloadSpeed: 2
-  BS_ShotgunBlastObject: {fileID: 1112733758}
   BS_BulletHitParticle: {fileID: 3410934234863709930, guid: 7186b5e618f5e254ab0e5e9c401f6aad,
     type: 3}
+  BS_ShotgunBlastObject: {fileID: 1112733758}
   PLAYSOUND_BS_ShotgunShoot: 0
   PLAYSOUND_ShotgunReload: 0
 --- !u!65 &1244891762
@@ -1382,7 +1401,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

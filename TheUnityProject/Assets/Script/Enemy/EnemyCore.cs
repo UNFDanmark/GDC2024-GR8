@@ -12,28 +12,30 @@ public class EnemyCore : MonoBehaviour
     Killstreak killStreak;
     
     // Loaded objects
-    Material enemyMAT;
-    Color originalColor;
+    public List<GameObject> enemyModels;
+    public List<Material> enemyMATS;
     NavMeshAgent enemyAI;
     Transform playerTransform;
-    public GameObject meleeWeapon;
-    public Animator meleeWeaponAnimator;
     AnimatorStateInfo animInfo;
+    public Animator enemyAnimator;
+    
     
     // Added traits
     public int maxHealth = 10;
     public int currentHealth;
     public float speed = 0.1f;
     public float range = 2;
+    public float damage = 5;
     
     bool doingColourChange = false;
     // Start is called before the first frame update
     void Awake()
     {
-        
         // Load the objects
-        enemyMAT = gameObject.GetComponent<MeshRenderer>().material;
-        originalColor = enemyMAT.color;
+        for (int i = 0; i < enemyModels.Count; i++)
+        {
+            enemyMATS.Add(enemyModels[i].GetComponent<MeshRenderer>().material);
+        }
         enemyAI = gameObject.GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         killStreak = GameObject.FindWithTag("Player").GetComponent<Killstreak>();
@@ -41,7 +43,6 @@ public class EnemyCore : MonoBehaviour
         currentHealth = maxHealth;
         enemyAI.speed = speed;
         enemyAI.destination = playerTransform.position;
-        animInfo = meleeWeaponAnimator.GetCurrentAnimatorStateInfo(0);
     }
 
     // Update is called once per frame
@@ -58,28 +59,40 @@ public class EnemyCore : MonoBehaviour
         enemyAI.speed = speed;
         if ((playerTransform.position - transform.position).magnitude <= range)
         {
+            transform.forward = (playerTransform.position - transform.position).normalized;
+            enemyAnimator.SetTrigger("Attack");
+            enemyAnimator.SetBool("IsRunning", false);
+        }
+        else if ((playerTransform.position - transform.position).magnitude <= range / 3)
+        {
+            enemyAnimator.SetTrigger("Attack");
             enemyAI.destination = transform.position;
-            transform.Rotate(playerTransform.position - transform.position);
+            transform.forward = (playerTransform.position - transform.position).normalized;
         }
         else
         {
             enemyAI.destination = playerTransform.position;
+            enemyAnimator.SetBool("IsRunning", true);
         }
 
-        if (enemyMAT.color != originalColor)
+        for (int i = 0; i < enemyMATS.Count; i++)
         {
-            if (!doingColourChange)
+            if (enemyMATS[i].color != Color.white)
             {
-                lastTimerChecked = timer;
-                doingColourChange = true;
-            }
+                if (!doingColourChange)
+                {
+                    lastTimerChecked = timer;
+                    doingColourChange = true;
+                }
             
-            if (timer >= lastTimerChecked + 0.3f)
-            {
-                enemyMAT.color = originalColor;
-                doingColourChange = false;
+                if (timer >= lastTimerChecked + 0.3f)
+                {
+                    enemyMATS[i].color = Color.white;
+                    doingColourChange = false;
+                }
             }
         }
+        
         /*
         if ((playerTransform.position - transform.position).magnitude <= range && animInfo.length < 1)
         {
