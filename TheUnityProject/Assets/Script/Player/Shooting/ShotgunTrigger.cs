@@ -95,8 +95,12 @@ public class ShotgunTrigger : MonoBehaviour
                     {
                         EnemyCore enemy = hit.collider.gameObject.GetComponent<EnemyCore>();
                         enemy.currentHealth--;
-                        enemy.gameObject.GetComponent<MeshRenderer>().material.color = new Color(1f,0.5f,0.5f);
-                        // enemy.gameObject.GetComponent<EnemyCore>().enemyMATS
+                        //enemy.gameObject.GetComponent<MeshRenderer>().material.color = new Color(1f,0.5f,0.5f);
+                        List<Material> enemyMaterials = enemy.gameObject.GetComponent<EnemyCore>().enemyMATS;
+                        for (int j = 0; j > enemyMaterials.Count; j++)
+                        {
+                            enemyMaterials[i].color = new Color(1f,0.5f,0.5f);
+                        }
                     }
                 }
             }

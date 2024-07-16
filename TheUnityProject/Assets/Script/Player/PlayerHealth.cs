@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(playerHealth);
         if (playerHealth <= 0)
         {
             // Player dies

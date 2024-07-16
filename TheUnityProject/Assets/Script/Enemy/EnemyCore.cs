@@ -16,9 +16,8 @@ public class EnemyCore : MonoBehaviour
     public List<Material> enemyMATS;
     NavMeshAgent enemyAI;
     Transform playerTransform;
-    public GameObject meleeWeapon;
-    public Animator meleeWeaponAnimator;
     AnimatorStateInfo animInfo;
+    public Animator enemyAnimator;
     
     // Added traits
     public int maxHealth = 10;
@@ -42,7 +41,6 @@ public class EnemyCore : MonoBehaviour
         currentHealth = maxHealth;
         enemyAI.speed = speed;
         enemyAI.destination = playerTransform.position;
-        animInfo = meleeWeaponAnimator.GetCurrentAnimatorStateInfo(0);
     }
 
     // Update is called once per frame
@@ -59,13 +57,20 @@ public class EnemyCore : MonoBehaviour
         enemyAI.speed = speed;
         if ((playerTransform.position - transform.position).magnitude <= range)
         {
+            transform.forward = (playerTransform.position - transform.position).normalized;
+            enemyAnimator.SetTrigger("Attack");
+            enemyAnimator.SetBool("IsRunning", false);
+        }
+        else if ((playerTransform.position - transform.position).magnitude <= range / 3)
+        {
+            enemyAnimator.SetTrigger("Attack");
             enemyAI.destination = transform.position;
-
             transform.forward = (playerTransform.position - transform.position).normalized;
         }
         else
         {
             enemyAI.destination = playerTransform.position;
+            enemyAnimator.SetBool("IsRunning", true);
         }
 
         for (int i = 0; i < enemyMATS.Count; i++)
