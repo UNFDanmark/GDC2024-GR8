@@ -12,8 +12,8 @@ public class EnemyCore : MonoBehaviour
     Killstreak killStreak;
     
     // Loaded objects
-    Material enemyMAT;
-    Color originalColor;
+    public List<GameObject> enemyModels;
+    public List<Material> enemyMATS;
     NavMeshAgent enemyAI;
     Transform playerTransform;
     public GameObject meleeWeapon;
@@ -30,10 +30,11 @@ public class EnemyCore : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        
         // Load the objects
-        enemyMAT = gameObject.GetComponent<MeshRenderer>().material;
-        originalColor = enemyMAT.color;
+        for (int i = 0; i < enemyModels.Count; i++)
+        {
+            enemyMATS.Add(enemyModels[i].GetComponent<MeshRenderer>().material);
+        }
         enemyAI = gameObject.GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         killStreak = GameObject.FindWithTag("Player").GetComponent<Killstreak>();
@@ -59,27 +60,32 @@ public class EnemyCore : MonoBehaviour
         if ((playerTransform.position - transform.position).magnitude <= range)
         {
             enemyAI.destination = transform.position;
-            transform.Rotate(playerTransform.position - transform.position);
+
+            transform.forward = (playerTransform.position - transform.position).normalized;
         }
         else
         {
             enemyAI.destination = playerTransform.position;
         }
 
-        if (enemyMAT.color != originalColor)
+        for (int i = 0; i < enemyMATS.Count; i++)
         {
-            if (!doingColourChange)
+            if (enemyMATS[i].color != Color.white)
             {
-                lastTimerChecked = timer;
-                doingColourChange = true;
-            }
+                if (!doingColourChange)
+                {
+                    lastTimerChecked = timer;
+                    doingColourChange = true;
+                }
             
-            if (timer >= lastTimerChecked + 0.3f)
-            {
-                enemyMAT.color = originalColor;
-                doingColourChange = false;
+                if (timer >= lastTimerChecked + 0.3f)
+                {
+                    enemyMATS[i].color = Color.white;
+                    doingColourChange = false;
+                }
             }
         }
+        
         /*
         if ((playerTransform.position - transform.position).magnitude <= range && animInfo.length < 1)
         {
