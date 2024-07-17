@@ -179,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         // WALK RUN FORCE
-        moveVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        moveVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         if (moveVector.magnitude >= 1)
         {
             moveVector = moveVector.normalized;
@@ -190,12 +190,13 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        moveVector = transform.TransformDirection(moveVector);
+        moveVector = transform.localRotation * moveVector;
         moveVector = speed * moveVector;
         moveVector.y = rb.velocity.y;
         moveVector.y -= transform.position.y * 0.01f; // Fix dash into enemy jump takes too long to fall down again (kinda fix only)
         rb.velocity = moveVector;
-        Debug.DrawRay(transform.position,moveVector,Color.red,0.5f);
+        moveVector = new Vector3();
+        Debug.DrawRay(transform.position,moveVector,Color.red, Time.fixedDeltaTime);
     }
 
     /*

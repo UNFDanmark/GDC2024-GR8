@@ -36,7 +36,7 @@ public class EnemyCore : MonoBehaviour
         // Load the objects
         for (int i = 0; i < enemyModels.Count; i++)
         {
-            enemyMATS.Add(enemyModels[i].GetComponent<MeshRenderer>().material);
+            enemyMATS.Add(enemyModels[i].GetComponent<SkinnedMeshRenderer>().material);
         }
         enemyAI = gameObject.GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
