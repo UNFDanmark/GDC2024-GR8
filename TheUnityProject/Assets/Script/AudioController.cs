@@ -73,12 +73,12 @@ public class AudioController : MonoBehaviour
         if (playerMovement.PLAYSOUND_Running)
         {
             PlayerAudioSource.pitch = Random.Range(1.6f, 1.8f); // pitch for variation
-            PlayerAudioSource.volume = Random.Range(0.14f, 0.18f); // Volume for Variation 
+            PlayerAudioSource.volume = Random.Range(0.42f, 0.54f); // Volume for Variation 
         }
         else
         {
             PlayerAudioSource.pitch = Random.Range(1.2f, 1.4f); // pitch for variation
-            PlayerAudioSource.volume = Random.Range(0.1f, 0.13f); // Volume for Variation 
+            PlayerAudioSource.volume = Random.Range(0.3f, 0.39f); // Volume for Variation 
         }
         
         
@@ -112,7 +112,7 @@ public class AudioController : MonoBehaviour
             
             
         }
-        else if (PlayerRB.velocity.z == 0 || PlayerRB.velocity.x == 0)
+        else if (PlayerRB.velocity.z <= 0.05f || PlayerRB.velocity.x <= 0.05f)
         {
             PlayerAudioSource.Stop();
             WalkSoundHasPlayed = false;
