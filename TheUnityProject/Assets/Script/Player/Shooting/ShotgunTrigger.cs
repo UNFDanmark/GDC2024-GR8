@@ -171,6 +171,7 @@ public class ShotgunTrigger : MonoBehaviour
     {
         if (PL_RemainingAmmo > 0)
         {
+            PLAYSOUND_PiercingLight = true;
             enemyHitList.Clear();
             lastHitPosition = new Vector3(100000,0,0);
             PL_RemainingAmmo--;
