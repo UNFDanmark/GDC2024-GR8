@@ -46,7 +46,13 @@ public class AudioController : MonoBehaviour
             print("shotgun just boomed");
 
         }
-        
+
+        if (playerMovement.PLAYSOUND_Jump)
+        {
+            print("GAYYYAYAYY");
+            PlayerAudioSource.clip = clipListPlayer[3]; // [3] is currently the jump sound
+            PlayerAudioSource.Play();
+        }
         
         if (playerMovement.PLAYSOUND_Running)
         {
@@ -65,7 +71,7 @@ public class AudioController : MonoBehaviour
         if (PlayerRB.velocity.z != 0 && PlayerRB.velocity.x != 0 && WalkSoundHasPlayed == false)
         {
 
-            PlayerAudioSource.clip = clipListPlayer[Random.Range(0, clipListPlayer.Length)]; 
+            PlayerAudioSource.clip = clipListPlayer[Random.Range(0, 2)]; 
             // Inserts a random clip from list into player audio source
             
             print("paasdsadsadasd");
