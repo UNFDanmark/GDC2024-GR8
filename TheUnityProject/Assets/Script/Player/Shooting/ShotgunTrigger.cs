@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ShotgunTrigger : MonoBehaviour
@@ -7,6 +8,8 @@ public class ShotgunTrigger : MonoBehaviour
     public int BS_BulletCount = 8;
     public float BS_Range = 0.3f;
     public int BS_remainingAmmo = 2;
+    public int PL_RemainingAmmo = 2;
+    public int currentSpellRemainingAmmo = 0;
     public float reloadSpeed = 2; // In seconds
     bool isReloading = false;
     float timer;
@@ -21,7 +24,7 @@ public class ShotgunTrigger : MonoBehaviour
     public bool PLAYSOUND_HitEnemy;
     List<GameObject> enemyHitList;
     public float PL_damage = 15;
-    Transform lastHitTransform;
+    Vector3 lastHitPosition;
     public GameObject PL_Ray;
     bool PLKeepGoing = true;
 
@@ -39,6 +42,14 @@ public class ShotgunTrigger : MonoBehaviour
         PLAYSOUND_BS_ShotgunShoot = false;
         PLAYSOUND_ShotgunReload = false;
         timer += Time.deltaTime;
+        if (selectedSpell == 0)
+        {
+            currentSpellRemainingAmmo = BS_remainingAmmo;
+        }
+        else if (selectedSpell == 1)
+        {
+            currentSpellRemainingAmmo = PL_RemainingAmmo;
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -54,7 +65,7 @@ public class ShotgunTrigger : MonoBehaviour
             if (!isReloading)
             {
                 isReloading = true;
-                Reload();
+                StartCoroutine(ResetReload(selectedSpell));
             }
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && timer >= lastTimerTrigger + 0.2f)
@@ -75,10 +86,6 @@ public class ShotgunTrigger : MonoBehaviour
         }
         */
     }
-    void Reload()
-    {
-        StartCoroutine("ResetReload");
-    }
 
     void ResetSounds()
     {
@@ -88,12 +95,19 @@ public class ShotgunTrigger : MonoBehaviour
         PLAYSOUND_BS_ShotgunShoot = false;
     }
 
-    IEnumerator ResetReload()
+    IEnumerator ResetReload(int spell)
     {
         PLAYSOUND_ShotgunReload = true;
         yield return new WaitForSeconds(reloadSpeed);
         isReloading = false;
-        BS_remainingAmmo = 2;
+        if (spell == 0)
+        {
+            BS_remainingAmmo = 2;
+        }
+        else if (spell == 1)
+        {
+            PL_RemainingAmmo = 2;
+        }
     }
 
     public void BuckshotShoot()
@@ -107,7 +121,7 @@ public class ShotgunTrigger : MonoBehaviour
             BS_remainingAmmo--;
             for (int i = 0; i < BS_BulletCount; i++)
             {
-                Vector3 spreadVector = transform.right * UnityEngine.Random.Range(-0.35f, 0.35f) + transform.up * UnityEngine.Random.Range(-0.35f, 0.35f);
+                Vector3 spreadVector = transform.right * UnityEngine.Random.Range(-0.2f, 0.2f) + transform.up * UnityEngine.Random.Range(-0.2f, 0.2f);
                 Vector3 bulletDirection = transform.forward + spreadVector;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position + (transform.forward * transform.localScale.z) / 1.5f, bulletDirection, out hit, BS_Range)) // For origin, it's set to be right in front of the shotgun
@@ -134,53 +148,74 @@ public class ShotgunTrigger : MonoBehaviour
             if (!isReloading)
             {
                 isReloading = true;
-                Reload();
+                StartCoroutine(ResetReload(0));
             }
         }
     }
 
     public void PiercingLightShoot()
     {
-        
-        enemyHitList.Clear();
-        lastHitTransform = null;
-        RaycastHit[] hits;
-        hits = Physics.RaycastAll(transform.position + (transform.forward * transform.localScale.z) / 1.5f,
-            transform.forward, Mathf.Infinity);
-        PLKeepGoing = true;
-        for (int i = 0; i < hits.Length; i++)
+        if (PL_RemainingAmmo > 0)
         {
-            if (PLKeepGoing)
+            enemyHitList.Clear();
+            lastHitPosition = new Vector3(100000,0,0);
+            PL_RemainingAmmo--;
+            RaycastHit[] hits;
+            hits = Physics.RaycastAll(transform.position + (transform.forward * transform.localScale.z) / 1.5f,
+                transform.forward, Mathf.Infinity);
+            PLKeepGoing = true;
+            for (int i = 0; i < hits.Length; i++)
             {
-                if (hits[i].collider.CompareTag("Enemy"))
+                if (PLKeepGoing)
                 {
-                    enemyHitList.Add(hits[i].collider.gameObject);
-                    lastHitTransform = hits[i].transform;
-                    PLAYSOUND_HitEnemy = true;
-                }
-                else
-                {
-                    lastHitTransform = hits[i].transform;
-                    PLKeepGoing = false;
+                    if (hits[i].collider.CompareTag("Enemy"))
+                    {
+                        enemyHitList.Add(hits[i].collider.gameObject);
+                        lastHitPosition = hits[i].transform.position;
+                    }
+                    else
+                    {
+                        lastHitPosition = hits[i].transform.position;
+                        PLKeepGoing = false;
+                    }
                 }
             }
-        }
 
-        for (int i = 0; i < enemyHitList.Count; i++)
-        {
-            enemyHitList[i].GetComponent<EnemyCore>().currentHealth -= (PL_damage * 1/i * UnityEngine.Random.Range(0.9f,1.1f));
-        }
+            if (lastHitPosition == new Vector3(100000,0,0))
+            {
+                lastHitPosition = transform.forward * 100;
+            }
 
-        if (lastHitTransform != null)
+            for (int i = 0; i < enemyHitList.Count; i++)
+            {
+                enemyHitList[i].GetComponent<EnemyCore>().currentHealth -= (PL_damage * 1/i * UnityEngine.Random.Range(0.9f,1.1f));
+                PLAYSOUND_HitEnemy = true;
+                List<Material> enemyMaterials = enemyHitList[i].gameObject.GetComponent<EnemyCore>().enemyMATS;
+                for (int j = 0; j > enemyMaterials.Count; j++)
+                {
+                    enemyMaterials[i].color = new Color(1f,0.5f,0.5f);
+                }
+            }
+
+            if (lastHitPosition != null)
+            {
+                float distanceFromShotgunToDisplay = (lastHitPosition - transform.position).magnitude /2;
+                Vector3 RayPosition = (transform.forward * distanceFromShotgunToDisplay) + transform.position;
+                GameObject PLRay = Instantiate(PL_Ray, RayPosition, UnityEngine.Quaternion.identity);
+                PLRay.transform.up = transform.forward;
+                Vector3 PLRayScale = PLRay.transform.localScale;
+                PLRayScale.y = (lastHitPosition - transform.position).magnitude;
+                PLRay.transform.localScale = PLRayScale;
+                Debug.Log(RayPosition);
+            }
+        }
+        else
         {
-            float distanceFromShotgunToDisplay = (lastHitTransform.position - transform.position).magnitude /2;
-            Vector3 RayPosition = (transform.forward * distanceFromShotgunToDisplay) + transform.position;
-            GameObject PLRay = Instantiate(PL_Ray, RayPosition, UnityEngine.Quaternion.identity);
-            PLRay.transform.up = transform.forward;
-            Vector3 PLRayScale = PLRay.transform.localScale;
-            PLRayScale.y = (lastHitTransform.position - transform.position).magnitude;
-            PLRay.transform.localScale = PLRayScale;
-            Debug.Log(RayPosition);
+            if (!isReloading)
+            {
+                isReloading = true;
+                StartCoroutine(ResetReload(1));
+            }
         }
     }
 }
