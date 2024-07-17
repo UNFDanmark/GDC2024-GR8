@@ -45,6 +45,9 @@ public class SoundController : MonoBehaviour
         _playerMovement = PlayerObject.GetComponent<PlayerMovement>();
         _ShotgunTrigger = ShotgunObject.GetComponent<ShotgunTrigger>();
         PlayerAudioSource = PlayerObject.GetComponent<AudioSource>();
+        ShotgunAudioSource = _ShotgunTrigger.GetComponent<AudioSource>();
+        DashAudioSource = DashAudioSourceObject.GetComponent<AudioSource>();
+        jumpAudioSource = JumpAudioSourceObject.GetComponent<AudioSource>();
 
     }
 
@@ -53,20 +56,72 @@ public class SoundController : MonoBehaviour
     void Update()
     {
 
-        if (_playerRB.velocity.x > 0 || _playerRB.velocity.z > 0)
+        if (_playerRB.velocity.x != 0 || _playerRB.velocity.z != 0)
         {
 
-            if (_playerMovement.PLAYSOUND_Walking && WalkSoundHasPlayed)
+            if (WalkSoundHasPlayed == false && PlayerAudioSource.isPlaying == false && _playerMovement.isGrounded)
             {
+                
+                PlayerAudioSource.clip = PlayerClipList[Random.Range(0, 3)];
+                PlayerAudioSource.pitch = Random.Range(1.2f, 1.4f); // pitch for variation
+                PlayerAudioSource.volume = Random.Range(0.3f, 0.39f); // Volume for Variation 
+                PlayerAudioSource.Play();
+                print("PLUH walk");
 
-                //PlayerAudioSource.clip = PlayerClipList[Random.Range(0, 3)];
-                PlayerAudioSource.PlayOneShot(PlayerClipList[Random.Range(0, 3)]);
-                PlayerAudioSource.pitch = Random.Range(0.3f, 0.6f);
+                if (_playerMovement.PLAYSOUND_Running)
+                {
+                    PlayerAudioSource.clip = PlayerClipList[Random.Range(0, 2)];
+                    PlayerAudioSource.pitch = Random.Range(1.6f, 1.8f); // pitch for variation
+                    PlayerAudioSource.volume = Random.Range(0.42f, 0.54f); // Volume for Variation 
+                    PlayerAudioSource.Play();
+                       
+                }
 
+                WalkSoundHasPlayed = true;
+                
 
             }
 
         }
+        else
+        {
+            PlayerAudioSource.Stop();
+            print("PLEASSEEE stay still");
+            WalkSoundHasPlayed = false;
+
+        }
+
+
+        if (_ShotgunTrigger.PLAYSOUND_BS_ShotgunShoot)
+        {
+
+            ShotgunAudioSource.PlayOneShot(ShotgunClipList[0]);
+        } else if (_ShotgunTrigger.PLAYSOUND_PiercingLight)
+        {
+            //ShotgunAudioSource.PlayOneShot(ShotgunClipList[1]);
+            ShotgunAudioSource.clip = ShotgunClipList[1];
+            ShotgunAudioSource.Play();
+        }
+
+        if (_playerMovement.isDashing)
+        {
+            DashAudioSource.PlayOneShot(PlayerClipList[4]);
+           
+        }
+        if (_playerMovement.PLAYSOUND_Jump)
+        {
+            DashAudioSource.PlayOneShot(PlayerClipList[3]);
+           DashAudioSource.Play();
+        }
+
+        /*if (_playerRB.velocity.x <= 0.05f || _playerRB.velocity.z <= 0.05f)
+        {
+            
+            PlayerAudioSource.Stop();
+            WalkSoundHasPlayed = false;
+            print("PLEASSEEE stay still");
+
+        }*/
 
     }
 }

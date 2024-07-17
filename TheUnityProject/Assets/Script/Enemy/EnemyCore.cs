@@ -52,11 +52,16 @@ public class EnemyCore : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        
+        enemyAI.destination = playerTransform.position;
         if (currentHealth <= 0)
         {
             killStreak.Kill();
             score.score += scoreBaseValue * score.scoreMultiplier;
+            Destroy(gameObject);
+        }
+
+        if (timer >= 120)
+        {
             Destroy(gameObject);
         }
         
@@ -78,6 +83,7 @@ public class EnemyCore : MonoBehaviour
             enemyAI.destination = playerTransform.position;
             enemyAnimator.SetBool("IsRunning", true);
         }
+        enemyAI.destination = playerTransform.position;
 
         for (int i = 0; i < enemyMATS.Count; i++)
         {

@@ -14,6 +14,9 @@ public class Playerhit : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log(playerHealth);
+        Debug.Log(other);
+        Debug.Log(other.gameObject.GetComponent<EnemyWeapon>().damage);
         playerHealth.playerHealth -= other.gameObject.GetComponent<EnemyWeapon>().damage;
     }
 }

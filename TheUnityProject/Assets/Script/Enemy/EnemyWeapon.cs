@@ -20,7 +20,10 @@ public class EnemyWeapon : MonoBehaviour
 
     void Update()
     {
-        
+        if (isFireBall)
+        {
+            Debug.Log("I'm a fireball yo");
+        }
     }
 
     void OnCollisionEnter(Collision other)

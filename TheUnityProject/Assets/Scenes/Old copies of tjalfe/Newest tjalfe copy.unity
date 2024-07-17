@@ -488,36 +488,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24dde1188694c90929707a1c24c5956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gradient:
-    serializedVersion: 2
-    key0: {r: 0.990566, g: 0.042052314, b: 0.19999667, a: 1}
-    key1: {r: 1, g: 0.9135958, b: 0.2216981, a: 1}
-    key2: {r: 0.40919083, g: 0.990566, b: 0.39716092, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 32960
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
+  shotgunScript: {fileID: 0}
+  healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
+  ammo1Trans: {fileID: 0}
+  ammo1Opaque: {fileID: 0}
+  ammo2Trans: {fileID: 0}
+  ammo2Opaque: {fileID: 0}
+  killStreakBar: {fileID: 0}
 --- !u!1 &459638422
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +536,8 @@ MonoBehaviour:
   timeBeforeStarting: 1
   amountPerWave: 1
   timeBetweenWaves: 4
+  PLAYSOUND_EnemySpawn: 0
+  isFireball: 0
 --- !u!65 &459638424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1174,6 +1154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BS_BulletCount: 18
   BS_Range: 13
+  BS_remainingAmmo: 2
+  PL_RemainingAmmo: 2
+  BS_DMG: 3
+  currentSpellRemainingAmmo: 0
   reloadSpeed: 2
   BS_BulletHitParticle: {fileID: 3410934234863709930, guid: 7186b5e618f5e254ab0e5e9c401f6aad,
     type: 3}
@@ -1181,6 +1165,12 @@ MonoBehaviour:
     type: 3}
   PLAYSOUND_BS_ShotgunShoot: 0
   PLAYSOUND_ShotgunReload: 0
+  PLAYSOUND_PiercingLight: 0
+  PLAYSOUND_HitEnemy: 0
+  PL_damage: 15
+  PL_Ray: {fileID: 0}
+  shotgunReloadAnimator: {fileID: 0}
+  selectedSpell: 0
 --- !u!82 &1023354359
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1585,31 +1575,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 1871106630}
   fovChangeTime: 3
-  walkSettings: --------------------------------
+  staminaRegen: 0
   walkSpeed: 12
   walkFOV: 60
   isWalking: 1
   canWalk: 1
   PLAYSOUND_Walking: 0
-  runSettings: --------------------------------
   runSpeed: 20
   runFOV: 75
   isRunning: 0
   canRun: 1
   PLAYSOUND_Running: 0
-  dashSettings: --------------------------------
+  runStaminaCost: 1
   dashSpeed: 100
   dashFOV: 95
   dashtime: 0.1
   isDashing: 0
   canDash: 1
   PLAYSOUND_DASH: 0
-  jumpSettings: --------------------------------
+  dashStaminaCost: 0
   jumpHeight: 7
   canJump: 1
   PLAYSOUND_Jump: 0
   PLAYSOUND_JumpLand: 0
   isGrounded: 1
+  isJumping: 0
 --- !u!114 &1362273787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1662,6 +1652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd69f2c62f2db944920b4d7c59c45c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killStreakSlider: {fileID: 0}
+  timer: 0
+  killTimer: 0
   streakRunOutTime: 5
   killStreak: 0
 --- !u!114 &1362273790
@@ -1679,6 +1672,7 @@ MonoBehaviour:
   playerMaxHealth: 25
   playerHealth: 10
   healthBarSliderScale: 1
+  playerDied: 0
   playerMaxStamina: 50
   playerStamina: 50
   staminaBarSliderScale: 1
