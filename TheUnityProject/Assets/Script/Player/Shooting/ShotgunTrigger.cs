@@ -42,6 +42,7 @@ public class ShotgunTrigger : MonoBehaviour
     {
         PLAYSOUND_BS_ShotgunShoot = false;
         PLAYSOUND_ShotgunReload = false;
+        ResetSounds();
         timer += Time.deltaTime;
         if (selectedSpell == 0)
         {

@@ -46,6 +46,8 @@ public class SoundController : MonoBehaviour
         _ShotgunTrigger = ShotgunObject.GetComponent<ShotgunTrigger>();
         PlayerAudioSource = PlayerObject.GetComponent<AudioSource>();
         ShotgunAudioSource = _ShotgunTrigger.GetComponent<AudioSource>();
+        DashAudioSource = DashAudioSourceObject.GetComponent<AudioSource>();
+        jumpAudioSource = JumpAudioSourceObject.GetComponent<AudioSource>();
 
     }
 
@@ -96,10 +98,21 @@ public class SoundController : MonoBehaviour
             ShotgunAudioSource.PlayOneShot(ShotgunClipList[0]);
         } else if (_ShotgunTrigger.PLAYSOUND_PiercingLight)
         {
-            ShotgunAudioSource.PlayOneShot(ShotgunClipList[1]);
+            //ShotgunAudioSource.PlayOneShot(ShotgunClipList[1]);
+            ShotgunAudioSource.clip = ShotgunClipList[1];
+            ShotgunAudioSource.Play();
         }
-        
-        
+
+        if (_playerMovement.isDashing)
+        {
+            DashAudioSource.PlayOneShot(PlayerClipList[4]);
+           
+        }
+        if (_playerMovement.PLAYSOUND_Jump)
+        {
+            DashAudioSource.PlayOneShot(PlayerClipList[3]);
+           
+        }
 
         /*if (_playerRB.velocity.x <= 0.05f || _playerRB.velocity.z <= 0.05f)
         {
