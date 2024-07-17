@@ -200,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /*
-    void FOVGlide(float finalFOV)
+    void FOVGlide(float finalFOV) 
     {
         switch (fovDirection)
         {   
