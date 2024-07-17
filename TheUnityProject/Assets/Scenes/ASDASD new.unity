@@ -1030,7 +1030,7 @@ GameObject:
   - component: {fileID: 431858691}
   m_Layer: 0
   m_Name: DashAudioSource
-  m_TagString: Untagged
+  m_TagString: DashAudioSource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1165,7 +1165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &459638423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2111,10 +2111,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioController
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7438273013698880781, guid: ccc79f696502fb948bf028210b88481f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7438273013698880781, guid: ccc79f696502fb948bf028210b88481f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1253935528}
   m_SourcePrefab: {fileID: 100100000, guid: ccc79f696502fb948bf028210b88481f, type: 3}
 --- !u!1 &945745726
 GameObject:
@@ -2510,7 +2520,7 @@ GameObject:
   - component: {fileID: 1142888763}
   m_Layer: 0
   m_Name: JumpAudioSource
-  m_TagString: Untagged
+  m_TagString: JumpAudioSource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2773,6 +2783,37 @@ RectTransform:
   m_AnchoredPosition: {x: -1110, y: 2}
   m_SizeDelta: {x: 40, y: 110}
   m_Pivot: {x: 1, y: 0}
+--- !u!1 &1253935525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7438273013698880781, guid: ccc79f696502fb948bf028210b88481f,
+    type: 3}
+  m_PrefabInstance: {fileID: 942443130}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1253935528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253935525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf421bf450ee9604da113bde5ce02a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerObject: {fileID: 0}
+  ShotgunObject: {fileID: 0}
+  DashAudioSourceObject: {fileID: 0}
+  JumpAudioSourceObject: {fileID: 0}
+  PlayerClipList:
+  - {fileID: 8300000, guid: d055cb413cd5daf43b1b2c70c964d667, type: 3}
+  - {fileID: 8300000, guid: dec4f6e6b3898ea4eb8053bdbfa764e3, type: 3}
+  - {fileID: 8300000, guid: 0c51888dab0ab9644a08185a8c15684a, type: 3}
+  - {fileID: 8300000, guid: ff1b7d999baccc445b93e80f51506cf0, type: 3}
+  - {fileID: 8300000, guid: abbd9bd27bcc1014487e611bc55288c0, type: 3}
+  ShotgunClipList:
+  - {fileID: 8300000, guid: 9fd7499cd16ee5a43b9c519726a1ece8, type: 3}
+  WalkSoundHasPlayed: 1
 --- !u!1 &1262640172
 GameObject:
   m_ObjectHideFlags: 0
@@ -3270,7 +3311,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -4486,6 +4527,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521751606297834621, guid: 5420336d4b0976b47b0c4555b539e90a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

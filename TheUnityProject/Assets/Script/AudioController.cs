@@ -79,6 +79,7 @@ public class AudioController : MonoBehaviour
         {
             PlayerAudioSource.pitch = Random.Range(1.2f, 1.4f); // pitch for variation
             PlayerAudioSource.volume = Random.Range(0.3f, 0.39f); // Volume for Variation 
+            
         }
         
         
