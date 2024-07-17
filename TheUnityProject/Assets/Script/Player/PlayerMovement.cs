@@ -19,14 +19,14 @@ public class PlayerMovement : MonoBehaviour
     
     // WALK RUN
     Vector3 moveVector;
-    public string walkSettings = "----------------"; // For orginisation in editor
+    [Header("Walk Settings")]
     public float walkSpeed = 2000;
     public float walkFOV = 10;
     public bool isWalking = true;
     public bool canWalk = true;
     public bool PLAYSOUND_Walking;
     
-    public string runSettings = "----------------"; // For orginisation in editor
+    [Header("Run Settings")]
     public float runSpeed = 3600;
     public float runFOV = 10;
     public bool isRunning = false;
@@ -37,7 +37,8 @@ public class PlayerMovement : MonoBehaviour
     private float speed;
     
     // DASH
-    public string dashSettings = "----------------"; // For orginisation in editor
+    //public string dashSettings = "----------------"; // For orginisation in editor
+    [Header("Dash Settings")]
     public float dashSpeed = 20000;
     public float dashFOV = 10;
     public float dashtime = 2;
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     
     // JUMP
     Vector3 jumpVector;
-    public string jumpSettings = "----------------"; // For orginisation in editor
+    [Header("Jump Settings")]
     public float jumpHeight = 2;
     public bool canJump = true;
     public bool PLAYSOUND_Jump;

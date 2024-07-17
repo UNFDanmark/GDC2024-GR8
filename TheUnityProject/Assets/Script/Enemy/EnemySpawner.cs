@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     public float timeBeforeStarting = 0;
     public int amountPerWave = 1;
     public float timeBetweenWaves = 10;
+    public bool PLAYSOUND_EnemySpawn;
     
     private int amountSpawned;
     private float timer;
@@ -36,6 +37,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PLAYSOUND_EnemySpawn = false;
         if (enableSpawner) timer += Time.deltaTime;
 
         if (timer > timeBeforeStarting)
@@ -67,5 +69,6 @@ public class EnemySpawner : MonoBehaviour
         spawnPoint.x = UnityEngine.Random.Range(corner1.x, corner2.x);
         spawnPoint.z = UnityEngine.Random.Range(corner1.z, corner2.z);
         Instantiate(spawnedCreature,spawnPoint,Quaternion.identity);
+        PLAYSOUND_EnemySpawn = true;
     }
 }

@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using Random = System.Random;
 
 public class ShotgunTrigger : MonoBehaviour
 {
@@ -20,6 +17,13 @@ public class ShotgunTrigger : MonoBehaviour
     
     public bool PLAYSOUND_BS_ShotgunShoot; // Note til Adam: Denne her bool vil blive sat til true i ÉN frame, og kun én, hver gang spilleren skydder.
     public bool PLAYSOUND_ShotgunReload;
+    public bool PLAYSOUND_PiercingLight;
+    public bool PLAYSOUND_HitEnemy;
+    List<GameObject> enemyHitList;
+    public float PL_damage = 15;
+    Transform lastHitTransform;
+    public GameObject PL_Ray;
+    bool PLKeepGoing = true;
 
     public int selectedSpell;
     // 0 = Buckshot
@@ -27,14 +31,23 @@ public class ShotgunTrigger : MonoBehaviour
 
     void Start()
     {
+        enemyHitList = new List<GameObject>();
     }
 
     void Update()
     {
         PLAYSOUND_BS_ShotgunShoot = false;
         PLAYSOUND_ShotgunReload = false;
-        
         timer += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            selectedSpell = 0;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            selectedSpell = 1;
+        }
         
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -52,7 +65,7 @@ public class ShotgunTrigger : MonoBehaviour
             }
             else if (selectedSpell == 1)
             {
-                
+                PiercingLightShoot();
             }
         }
         /*
@@ -65,6 +78,14 @@ public class ShotgunTrigger : MonoBehaviour
     void Reload()
     {
         StartCoroutine("ResetReload");
+    }
+
+    void ResetSounds()
+    {
+        PLAYSOUND_HitEnemy = false;
+        PLAYSOUND_PiercingLight = false;
+        PLAYSOUND_ShotgunReload = false;
+        PLAYSOUND_BS_ShotgunShoot = false;
     }
 
     IEnumerator ResetReload()
@@ -97,6 +118,7 @@ public class ShotgunTrigger : MonoBehaviour
                     {
                         EnemyCore enemy = hit.collider.gameObject.GetComponent<EnemyCore>();
                         enemy.currentHealth--;
+                        PLAYSOUND_HitEnemy = true;
                         //enemy.gameObject.GetComponent<MeshRenderer>().material.color = new Color(1f,0.5f,0.5f);
                         List<Material> enemyMaterials = enemy.gameObject.GetComponent<EnemyCore>().enemyMATS;
                         for (int j = 0; j > enemyMaterials.Count; j++)
@@ -119,16 +141,46 @@ public class ShotgunTrigger : MonoBehaviour
 
     public void PiercingLightShoot()
     {
+        
+        enemyHitList.Clear();
+        lastHitTransform = null;
         RaycastHit[] hits;
         hits = Physics.RaycastAll(transform.position + (transform.forward * transform.localScale.z) / 1.5f,
             transform.forward, Mathf.Infinity);
-        List<GameObject> enemyHitList;
+        PLKeepGoing = true;
         for (int i = 0; i < hits.Length; i++)
         {
-            if (hits[i].collider.CompareTag("Enemy"))
+            if (PLKeepGoing)
             {
-                //enemyHitList.Add(hits[i].collider);
+                if (hits[i].collider.CompareTag("Enemy"))
+                {
+                    enemyHitList.Add(hits[i].collider.gameObject);
+                    lastHitTransform = hits[i].transform;
+                    PLAYSOUND_HitEnemy = true;
+                }
+                else
+                {
+                    lastHitTransform = hits[i].transform;
+                    PLKeepGoing = false;
+                }
             }
+        }
+
+        for (int i = 0; i < enemyHitList.Count; i++)
+        {
+            enemyHitList[i].GetComponent<EnemyCore>().currentHealth -= (PL_damage * 1/i * UnityEngine.Random.Range(0.9f,1.1f));
+        }
+
+        if (lastHitTransform != null)
+        {
+            float distanceFromShotgunToDisplay = (lastHitTransform.position - transform.position).magnitude /2;
+            Vector3 RayPosition = (transform.forward * distanceFromShotgunToDisplay) + transform.position;
+            GameObject PLRay = Instantiate(PL_Ray, RayPosition, UnityEngine.Quaternion.identity);
+            PLRay.transform.up = transform.forward;
+            Vector3 PLRayScale = PLRay.transform.localScale;
+            PLRayScale.y = (lastHitTransform.position - transform.position).magnitude;
+            PLRay.transform.localScale = PLRayScale;
+            Debug.Log(RayPosition);
         }
     }
 }
