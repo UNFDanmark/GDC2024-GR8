@@ -36,7 +36,7 @@ public class CameraRotate : MonoBehaviour
         */
         transform.Rotate(-mouseY,0,0);
         
-        if (Vector3.Dot(transform.forward, new Vector3(0, 1, 0)) >= 0.9f || Vector3.Dot(transform.forward, new Vector3(0, 1, 0)) <= -0.9f)
+        if (Vector3.Dot(transform.forward, new Vector3(0, 1, 0)) >= 0.95f || Vector3.Dot(transform.forward, new Vector3(0, 1, 0)) <= -0.95f)
         {
             transform.Rotate(mouseY,0,0);
         }

@@ -30,17 +30,17 @@ public class UI : MonoBehaviour
 
     void Update()
     {
-        if (shotgunScript.BS_remainingAmmo == 2)
+        if (shotgunScript.currentSpellRemainingAmmo == 2)
         {
             ammo1Opaque.SetActive(true);
             ammo2Opaque.SetActive(true);
         }
-        if (shotgunScript.BS_remainingAmmo == 1)
+        if (shotgunScript.currentSpellRemainingAmmo == 1)
         {
             ammo1Opaque.SetActive(false);
             ammo2Opaque.SetActive(true);
         }
-        if (shotgunScript.BS_remainingAmmo == 0)
+        if (shotgunScript.currentSpellRemainingAmmo == 0)
         {
             ammo1Opaque.SetActive(false);
             ammo2Opaque.SetActive(false);
