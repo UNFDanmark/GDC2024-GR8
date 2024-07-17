@@ -35,7 +35,7 @@ public class AudioController : MonoBehaviour
         Shotgun = GameObject.FindWithTag("Shotgun");
         PlayerRB = PlayerObject.GetComponent<Rigidbody>();
         ShotgunAudioSource = Shotgun.GetComponent<AudioSource>();
-        SpawnerScript = Spawner.GetComponent<EnemySpawner>();
+        //SpawnerScript = Spawner.GetComponent<EnemySpawner>();
 
     }
 
@@ -79,6 +79,7 @@ public class AudioController : MonoBehaviour
         {
             PlayerAudioSource.pitch = Random.Range(1.2f, 1.4f); // pitch for variation
             PlayerAudioSource.volume = Random.Range(0.3f, 0.39f); // Volume for Variation 
+            
         }
         
         

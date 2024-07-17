@@ -11,12 +11,12 @@ public class Killstreak : MonoBehaviour
     public float killTimer = 0;
     public float streakRunOutTime = 2f;
     public int killStreak = 0;
-    float killStreakBarScale = 0;
-    KillStreakUI killStreakUI;
+    float killStreakBarScale;
+    //KillStreakUI killStreakUI;
     
     void Start()
     {
-        killStreakUI = GameObject.FindWithTag("StreakText").GetComponent<KillStreakUI>();
+        //killStreakUI = GameObject.FindWithTag("StreakText").GetComponent<KillStreakUI>();
     }
 
     void Update()
@@ -29,7 +29,7 @@ public class Killstreak : MonoBehaviour
 
         if(killTimer != 0) killStreakSlider.value = math.unlerp(streakRunOutTime, 0, timer-killTimer);
 
-        killStreakUI.streak = killStreak;
+        //killStreakUI.streak = killStreak;
     }
     public void Kill()
     {

@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     Collider playerCollider;
     public GameObject cameraObject;
     public float fovChangeTime = 1f;
-    private Camera camera;
+    private new Camera camera;
     private float lastFOV;
     private float timer;
     private float fovTimer = 0;
@@ -235,7 +235,6 @@ public class PlayerMovement : MonoBehaviour
     */
     void Jump()
     {
-        RaycastHit hit;
         if (isGrounded)
         {
             Debug.DrawRay(transform.position,-transform.up, Color.blue,3);

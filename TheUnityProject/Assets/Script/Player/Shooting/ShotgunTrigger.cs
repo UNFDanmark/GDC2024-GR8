@@ -28,6 +28,7 @@ public class ShotgunTrigger : MonoBehaviour
     Vector3 lastHitPosition;
     public GameObject PL_Ray;
     bool PLKeepGoing = true;
+    public Animator shotgunReloadAnimator;
 
     public int selectedSpell;
     // 0 = Buckshot
@@ -42,6 +43,7 @@ public class ShotgunTrigger : MonoBehaviour
     {
         PLAYSOUND_BS_ShotgunShoot = false;
         PLAYSOUND_ShotgunReload = false;
+        ResetSounds();
         timer += Time.deltaTime;
         if (selectedSpell == 0)
         {
@@ -109,6 +111,7 @@ public class ShotgunTrigger : MonoBehaviour
 
     IEnumerator ResetReload(int spell)
     {
+        shotgunReloadAnimator.SetTrigger("Reload");
         PLAYSOUND_ShotgunReload = true;
         yield return new WaitForSeconds(reloadSpeed);
         isReloading = false;
@@ -169,6 +172,7 @@ public class ShotgunTrigger : MonoBehaviour
     {
         if (PL_RemainingAmmo > 0)
         {
+            PLAYSOUND_PiercingLight = true;
             enemyHitList.Clear();
             lastHitPosition = new Vector3(100000,0,0);
             PL_RemainingAmmo--;

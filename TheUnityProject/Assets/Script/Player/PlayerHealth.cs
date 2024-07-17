@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public float playerMaxHealth = 100;
     public float playerHealth;
     public float healthBarSliderScale = 1;
-    private bool playerDied;
+    public bool playerDied;
     // Stamina
     public float playerMaxStamina = 100;
     public float playerStamina;
