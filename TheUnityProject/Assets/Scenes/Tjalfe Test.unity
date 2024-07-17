@@ -1187,6 +1187,7 @@ MonoBehaviour:
   amountPerWave: 4
   timeBetweenWaves: 3
   PLAYSOUND_EnemySpawn: 0
+  isFireball: 0
 --- !u!65 &459638424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2400,6 +2401,7 @@ MonoBehaviour:
   PLAYSOUND_HitEnemy: 0
   PL_damage: 210
   PL_Ray: {fileID: 5604731565769586970, guid: fd1243dea630a9847a9f456c7a6ff734, type: 3}
+  shotgunReloadAnimator: {fileID: 0}
   selectedSpell: 0
 --- !u!82 &1023354359
 AudioSource:
@@ -2726,7 +2728,9 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: db7a24578a7030b4aa3824db2c44ceb0, type: 2}
   m_sharedMaterial: {fileID: -3727792487983529121, guid: db7a24578a7030b4aa3824db2c44ceb0,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -3727792487983529121, guid: db7a24578a7030b4aa3824db2c44ceb0, type: 2}
+  - {fileID: 0}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3102,6 +3106,7 @@ MonoBehaviour:
   playerMaxHealth: 100
   playerHealth: 100
   healthBarSliderScale: 1
+  playerDied: 0
   playerMaxStamina: 100
   playerStamina: 100
   staminaBarSliderScale: 1
@@ -3277,7 +3282,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

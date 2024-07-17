@@ -890,6 +890,7 @@ MonoBehaviour:
   ammo1Opaque: {fileID: 641485641}
   ammo2Trans: {fileID: 1793466006}
   ammo2Opaque: {fileID: 1888334264}
+  killStreakBar: {fileID: 0}
 --- !u!1 &459638422
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +932,7 @@ MonoBehaviour:
   amountPerWave: 4
   timeBetweenWaves: 3
   PLAYSOUND_EnemySpawn: 0
+  isFireball: 0
 --- !u!65 &459638424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1881,6 +1883,7 @@ MonoBehaviour:
   BS_Range: 13
   BS_remainingAmmo: 2
   PL_RemainingAmmo: 2
+  BS_DMG: 3
   currentSpellRemainingAmmo: 0
   reloadSpeed: 2
   BS_BulletHitParticle: {fileID: 3410934234863709930, guid: 7186b5e618f5e254ab0e5e9c401f6aad,
@@ -1893,6 +1896,7 @@ MonoBehaviour:
   PLAYSOUND_HitEnemy: 0
   PL_damage: 15
   PL_Ray: {fileID: 0}
+  shotgunReloadAnimator: {fileID: 0}
   selectedSpell: 0
 --- !u!82 &1023354359
 AudioSource:
@@ -2052,7 +2056,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2333,7 +2338,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f224154ae8b202f488c7404f65c730c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killstreak: {fileID: 0}
+  playerTransform: {fileID: 0}
   score: 0
+  scoreMultiplier: 1
 --- !u!114 &1262640175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2358,7 +2366,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2714,6 +2723,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd69f2c62f2db944920b4d7c59c45c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killStreakSlider: {fileID: 0}
+  timer: 0
+  killTimer: 0
   streakRunOutTime: 5
   killStreak: 0
 --- !u!114 &1362273790
@@ -2731,6 +2743,7 @@ MonoBehaviour:
   playerMaxHealth: 100
   playerHealth: 100
   healthBarSliderScale: 1
+  playerDied: 0
   playerMaxStamina: 100
   playerStamina: 100
   staminaBarSliderScale: 1
@@ -2906,7 +2919,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
