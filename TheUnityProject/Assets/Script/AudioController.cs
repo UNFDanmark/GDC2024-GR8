@@ -17,7 +17,9 @@ public class AudioController : MonoBehaviour
     // 2. Footstep
     // 3. Footstep
 
-    
+    private GameObject Enemy;
+    private GameObject Spawner;
+    private EnemySpawner SpawnerScript;
     
     private AudioSource PlayerAudioSource;
 
@@ -33,13 +35,19 @@ public class AudioController : MonoBehaviour
         Shotgun = GameObject.FindWithTag("Shotgun");
         PlayerRB = PlayerObject.GetComponent<Rigidbody>();
         ShotgunAudioSource = Shotgun.GetComponent<AudioSource>();
+        SpawnerScript = Spawner.GetComponent<EnemySpawner>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-
+        
+        
+        
+        
+        
         if (playerMovement.PLAYSOUND_DASH)
         {
             EmptyGameObjectOnPLayer.GetComponent<AudioSource>().PlayOneShot(clipListPlayer[4]);
