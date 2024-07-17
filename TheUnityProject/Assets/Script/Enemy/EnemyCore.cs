@@ -52,7 +52,7 @@ public class EnemyCore : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        enemyAI.destination = transform.position;
+        enemyAI.destination = playerTransform.position;
         if (currentHealth <= 0)
         {
             killStreak.Kill();
@@ -78,6 +78,7 @@ public class EnemyCore : MonoBehaviour
             enemyAI.destination = playerTransform.position;
             enemyAnimator.SetBool("IsRunning", true);
         }
+        enemyAI.destination = playerTransform.position;
 
         for (int i = 0; i < enemyMATS.Count; i++)
         {
