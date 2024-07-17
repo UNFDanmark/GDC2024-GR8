@@ -1572,6 +1572,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
+        type: 3}
+      propertyPath: PlayerObject
+      value: 
+      objectReference: {fileID: 1362273778}
+    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
+        type: 3}
       propertyPath: EmptyGameObjectOnPLayer
       value: 
       objectReference: {fileID: 1670732784}
@@ -1870,6 +1880,8 @@ MonoBehaviour:
   BS_BulletCount: 18
   BS_Range: 13
   BS_remainingAmmo: 2
+  PL_RemainingAmmo: 2
+  currentSpellRemainingAmmo: 0
   reloadSpeed: 2
   BS_BulletHitParticle: {fileID: 3410934234863709930, guid: 7186b5e618f5e254ab0e5e9c401f6aad,
     type: 3}
