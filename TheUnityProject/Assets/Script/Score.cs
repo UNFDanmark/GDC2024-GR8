@@ -6,10 +6,11 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     private TMP_Text textComponent;
+    public Killstreak killstreak;
+    public Transform playerTransform;
 
     public float score = 0;
-
-    string displayScore;
+    public float scoreMultiplier = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,8 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        displayScore = Mathf.RoundToInt(score).ToString();
-        textComponent.text = "Score: " + displayScore;
+        scoreMultiplier = playerTransform.position.y * 0.25f * (1 + killstreak.killStreak * 0.1f)+.75f;
+        textComponent.text = $"Score: {score:0000000}\n" +
+                             $"Multiplier: {scoreMultiplier:F1}x";
     }
 }

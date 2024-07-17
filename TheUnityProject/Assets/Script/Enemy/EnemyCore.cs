@@ -27,7 +27,7 @@ public class EnemyCore : MonoBehaviour
     public float speed = 0.1f;
     public float range = 2;
     public float damage = 5;
-    public float scoreBaseValue = 50;
+    public float scoreBaseValue = 20;
     
     bool doingColourChange = false;
     // Start is called before the first frame update
@@ -56,15 +56,14 @@ public class EnemyCore : MonoBehaviour
         if (currentHealth <= 0)
         {
             killStreak.Kill();
-            scoreBaseValue *= killStreak.killStreak * 0.1f;
-            score.score += scoreBaseValue;
+            score.score += scoreBaseValue * score.scoreMultiplier;
             Destroy(gameObject);
         }
         
         enemyAI.speed = speed;
         if ((playerTransform.position - transform.position).magnitude <= range)
         {
-            transform.forward = (playerTransform.position - transform.position).normalized;
+            transform.forward = new Vector3(playerTransform.position.x - transform.position.x,0,playerTransform.position.z - transform.position.z);
             enemyAnimator.SetTrigger("Attack");
             enemyAnimator.SetBool("IsRunning", false);
         }
@@ -90,7 +89,7 @@ public class EnemyCore : MonoBehaviour
                     doingColourChange = true;
                 }
             
-                if (timer >= lastTimerChecked + 0.3f)
+                if (timer >= lastTimerChecked + 0.4f)
                 {
                     enemyMATS[i].color = Color.white;
                     doingColourChange = false;

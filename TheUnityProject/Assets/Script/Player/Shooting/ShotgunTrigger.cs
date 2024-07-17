@@ -9,6 +9,7 @@ public class ShotgunTrigger : MonoBehaviour
     public float BS_Range = 0.3f;
     public int BS_remainingAmmo = 2;
     public int PL_RemainingAmmo = 2;
+    public float BS_DMG = 3;
     public int currentSpellRemainingAmmo = 0;
     public float reloadSpeed = 2; // In seconds
     bool isReloading = false;
@@ -79,6 +80,17 @@ public class ShotgunTrigger : MonoBehaviour
                 PiercingLightShoot();
             }
         }
+        else
+        {
+            if (selectedSpell == 0 && BS_remainingAmmo == 0)
+            {
+                BuckshotShoot();
+            }
+            else if (selectedSpell == 1 && PL_RemainingAmmo == 0)
+            {
+                PiercingLightShoot();
+            }
+        }
         /*
         else if (timer >= lastTimerTrigger + 0.15f)
         {
@@ -131,13 +143,13 @@ public class ShotgunTrigger : MonoBehaviour
                     if (hit.collider.gameObject.CompareTag("Enemy"))
                     {
                         EnemyCore enemy = hit.collider.gameObject.GetComponent<EnemyCore>();
-                        enemy.currentHealth--;
+                        enemy.currentHealth -= BS_DMG;
                         PLAYSOUND_HitEnemy = true;
                         //enemy.gameObject.GetComponent<MeshRenderer>().material.color = new Color(1f,0.5f,0.5f);
                         List<Material> enemyMaterials = enemy.gameObject.GetComponent<EnemyCore>().enemyMATS;
-                        for (int j = 0; j > enemyMaterials.Count; j++)
+                        for (int j = 0; j < enemyMaterials.Count; j++)
                         {
-                            enemyMaterials[i].color = new Color(1f,0.5f,0.5f);
+                            enemyMaterials[j].color = new Color(1f,0.5f,0.5f);
                         }
                     }
                 }
@@ -191,9 +203,10 @@ public class ShotgunTrigger : MonoBehaviour
                 enemyHitList[i].GetComponent<EnemyCore>().currentHealth -= (PL_damage * 1/i * UnityEngine.Random.Range(0.9f,1.1f));
                 PLAYSOUND_HitEnemy = true;
                 List<Material> enemyMaterials = enemyHitList[i].gameObject.GetComponent<EnemyCore>().enemyMATS;
-                for (int j = 0; j > enemyMaterials.Count; j++)
+                for (int j = 0; j < enemyMaterials.Count; j++)
                 {
-                    enemyMaterials[i].color = new Color(1f,0.5f,0.5f);
+                    Debug.Log("SHOULD BE RED");
+                    enemyMaterials[j].color = new Color(1f,0.5f,0.5f);
                 }
             }
 

@@ -999,7 +999,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4463992135761689231}
   - component: {fileID: 117701981412829633}
-  - component: {fileID: 3523443035134766676}
+  - component: {fileID: 9009817263859385579}
   - component: {fileID: 3454358190858488550}
   - component: {fileID: 7181436424672902862}
   m_Layer: 0
@@ -1034,8 +1034,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4521751606297834621}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &3523443035134766676
-BoxCollider:
+--- !u!136 &9009817263859385579
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1052,9 +1052,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 2.55, z: 1}
-  m_Center: {x: 0, y: 0.3, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Height: 2.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!114 &3454358190858488550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1071,12 +1073,12 @@ MonoBehaviour:
   - {fileID: 4410832820670023869}
   enemyMATS: []
   enemyAnimator: {fileID: 8591695178500902097}
-  maxHealth: 10
-  currentHealth: 10
+  maxHealth: 100
+  currentHealth: 100
   speed: 13
   range: 5
   damage: 9
-  scoreBaseValue: 50
+  scoreBaseValue: 200
 --- !u!195 &7181436424672902862
 NavMeshAgent:
   m_ObjectHideFlags: 0

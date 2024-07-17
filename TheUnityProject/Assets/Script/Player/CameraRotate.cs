@@ -18,7 +18,6 @@ public class CameraRotate : MonoBehaviour
     void Update()
     {
         mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity;
-
         //Debug.Log("First statement: " + !(transform.rotation.x <= -90) + "   Second statement: " + !(transform.rotation.x >= 90));
         //Debug.Log(transform.localEulerAngles);
         /*
@@ -36,7 +35,7 @@ public class CameraRotate : MonoBehaviour
         */
         transform.Rotate(-mouseY,0,0);
         
-        if (Vector3.Dot(transform.forward, new Vector3(0, 1, 0)) >= 0.95f || Vector3.Dot(transform.forward, new Vector3(0, 1, 0)) <= -0.95f)
+        if (Vector3.Dot(transform.forward, new Vector3(0, 1, 0)) >= 0.98f || Vector3.Dot(transform.forward, new Vector3(0, 1, 0)) <= -0.98f)
         {
             transform.Rotate(mouseY,0,0);
         }

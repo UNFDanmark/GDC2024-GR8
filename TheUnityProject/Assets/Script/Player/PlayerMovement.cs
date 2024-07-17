@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (!isRunning && isGrounded && !isDashing && healthScript.playerStamina <= healthScript.playerMaxStamina)
+        if (!isRunning && !isDashing && healthScript.playerStamina <= healthScript.playerMaxStamina)
         {
             healthScript.playerStamina += staminaRegen;
         }
