@@ -56,6 +56,7 @@ public class EnemyCore : MonoBehaviour
         if (currentHealth <= 0)
         {
             killStreak.Kill();
+            scoreBaseValue *= killStreak.killStreak * 0.1f;
             score.score += scoreBaseValue;
             Destroy(gameObject);
         }

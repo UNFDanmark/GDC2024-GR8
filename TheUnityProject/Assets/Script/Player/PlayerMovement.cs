@@ -242,7 +242,6 @@ public class PlayerMovement : MonoBehaviour
             isJumping = true;
             jumpVector = new Vector3(0, jumpHeight, 0);
             rb.velocity += jumpVector;
-            StartCoroutine("PlayerJumpingLand");
         }
     }
 

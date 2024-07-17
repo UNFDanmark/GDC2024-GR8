@@ -928,8 +928,8 @@ MonoBehaviour:
   enableSpawner: 1
   totalSpawnAmount: 25
   timeBeforeStarting: 1
-  amountPerWave: 1
-  timeBetweenWaves: 4
+  amountPerWave: 4
+  timeBetweenWaves: 3
 --- !u!65 &459638424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1856,6 +1856,7 @@ MonoBehaviour:
     type: 3}
   PLAYSOUND_BS_ShotgunShoot: 0
   PLAYSOUND_ShotgunReload: 0
+  selectedSpell: 0
 --- !u!82 &1023354359
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2598,7 +2599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 1871106630}
   fovChangeTime: 3
-  staminaRegen: 0.3
+  staminaRegen: 0.17
   walkSettings: --------------------------------
   walkSpeed: 12
   walkFOV: 60
@@ -2611,7 +2612,7 @@ MonoBehaviour:
   isRunning: 0
   canRun: 1
   PLAYSOUND_Running: 0
-  runStaminaCost: 0.4
+  runStaminaCost: 0.24
   dashSettings: --------------------------------
   dashSpeed: 100
   dashFOV: 95
@@ -2619,7 +2620,7 @@ MonoBehaviour:
   isDashing: 0
   canDash: 1
   PLAYSOUND_DASH: 0
-  dashStaminaCost: 30
+  dashStaminaCost: 26
   jumpSettings: --------------------------------
   jumpHeight: 7
   canJump: 1
