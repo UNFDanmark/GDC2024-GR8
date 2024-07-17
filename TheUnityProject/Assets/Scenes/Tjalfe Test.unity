@@ -930,6 +930,7 @@ MonoBehaviour:
   timeBeforeStarting: 1
   amountPerWave: 4
   timeBetweenWaves: 3
+  PLAYSOUND_EnemySpawn: 0
 --- !u!65 &459638424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1371,7 +1372,6 @@ GameObject:
   - component: {fileID: 641269349}
   - component: {fileID: 641269348}
   - component: {fileID: 641269347}
-  - component: {fileID: 641269346}
   m_Layer: 0
   m_Name: "Pierc\xEDngLightRay"
   m_TagString: Untagged
@@ -1379,29 +1379,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &641269346
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641269345}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &641269347
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1462,7 +1439,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.40626925, y: 1.9603368, z: 1.952318}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1964,6 +1941,8 @@ MonoBehaviour:
     type: 3}
   PLAYSOUND_BS_ShotgunShoot: 0
   PLAYSOUND_ShotgunReload: 0
+  PLAYSOUND_PiercingLight: 0
+  PLAYSOUND_HitEnemy: 0
   PL_damage: 15
   PL_Ray: {fileID: 641269345}
   selectedSpell: 0
