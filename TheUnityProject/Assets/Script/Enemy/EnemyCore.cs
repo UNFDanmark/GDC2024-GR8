@@ -52,7 +52,7 @@ public class EnemyCore : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        
+        enemyAI.destination = transform.position;
         if (currentHealth <= 0)
         {
             killStreak.Kill();
