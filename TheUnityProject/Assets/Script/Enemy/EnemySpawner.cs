@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     public int amountPerWave = 1;
     public float timeBetweenWaves = 10;
     public bool PLAYSOUND_EnemySpawn;
+    public bool isFireball;
     
     private int amountSpawned;
     private float timer;
@@ -64,7 +65,14 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         Vector3 spawnPoint;
-        spawnPoint.y = 0;
+        if (isFireball)
+        {
+            spawnPoint.y = 200;
+        }
+        else
+        {
+            spawnPoint.y = 0;
+        }
 
         spawnPoint.x = UnityEngine.Random.Range(corner1.x, corner2.x);
         spawnPoint.z = UnityEngine.Random.Range(corner1.z, corner2.z);

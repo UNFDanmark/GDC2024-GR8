@@ -35,7 +35,7 @@ public class AudioController : MonoBehaviour
         Shotgun = GameObject.FindWithTag("Shotgun");
         PlayerRB = PlayerObject.GetComponent<Rigidbody>();
         ShotgunAudioSource = Shotgun.GetComponent<AudioSource>();
-        SpawnerScript = Spawner.GetComponent<EnemySpawner>();
+        //SpawnerScript = Spawner.GetComponent<EnemySpawner>();
 
     }
 
