@@ -8,8 +8,8 @@ TagManager:
   - Bullet
   - Enemy
   - Ground
-  - HealthBar
-  - StaminaBar
+  - ScoreText
+  - StreakText
   layers:
   - Default
   - TransparentFX

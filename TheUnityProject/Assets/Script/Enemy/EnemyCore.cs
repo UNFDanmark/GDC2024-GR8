@@ -18,6 +18,7 @@ public class EnemyCore : MonoBehaviour
     Transform playerTransform;
     AnimatorStateInfo animInfo;
     public Animator enemyAnimator;
+    Score score;
     
     
     // Added traits
@@ -26,6 +27,7 @@ public class EnemyCore : MonoBehaviour
     public float speed = 0.1f;
     public float range = 2;
     public float damage = 5;
+    public float scoreBaseValue = 50;
     
     bool doingColourChange = false;
     // Start is called before the first frame update
@@ -39,6 +41,7 @@ public class EnemyCore : MonoBehaviour
         enemyAI = gameObject.GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         killStreak = GameObject.FindWithTag("Player").GetComponent<Killstreak>();
+        score = GameObject.FindWithTag("ScoreText").GetComponent<Score>();
         
         currentHealth = maxHealth;
         enemyAI.speed = speed;
@@ -53,6 +56,7 @@ public class EnemyCore : MonoBehaviour
         if (currentHealth <= 0)
         {
             killStreak.Kill();
+            score.score += scoreBaseValue;
             Destroy(gameObject);
         }
         

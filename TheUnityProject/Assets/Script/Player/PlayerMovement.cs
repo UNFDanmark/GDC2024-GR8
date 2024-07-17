@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
@@ -11,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private float timer;
     private float fovTimer = 0;
     float fovTimer2 = 0;
+    PlayerHealth healthScript;
+    public float staminaRegen;
     
     // WALK RUN
     Vector3 moveVector;
@@ -27,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isRunning = false;
     public bool canRun = true;
     public bool PLAYSOUND_Running;
+    public float runStaminaCost = 1;
     
     private float speed;
     
@@ -38,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isDashing = false;
     public bool canDash = true;
     public bool PLAYSOUND_DASH;
+    public float dashStaminaCost;
     
     private float dashTimer = 0;
     
@@ -49,13 +56,14 @@ public class PlayerMovement : MonoBehaviour
     public bool PLAYSOUND_Jump;
     public bool PLAYSOUND_JumpLand;
     public bool isGrounded = true;
-    
+    public bool isJumping = false;
     
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         playerCollider = GetComponent<Collider>();
         camera = cameraObject.GetComponent<Camera>();
+        healthScript = GetComponent<PlayerHealth>();
         lastFOV = walkFOV;
     }
 
@@ -69,6 +77,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
+        if (!isRunning && isGrounded && !isDashing && healthScript.playerStamina <= healthScript.playerMaxStamina)
+        {
+            healthScript.playerStamina += staminaRegen;
+        }
         timer += Time.deltaTime;
         ResetSounds();
         if (speed == walkSpeed)
@@ -87,12 +99,13 @@ public class PlayerMovement : MonoBehaviour
             if (Math.Abs(dashFOV - camera.fieldOfView) < 1) camera.fieldOfView = dashFOV;
         }
         
-        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash && !isDashing)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash && !isDashing && healthScript.playerStamina >= dashStaminaCost)
         {
             dashTimer = timer;
             isDashing = true;
             PLAYSOUND_DASH = true;
             speed = dashSpeed;
+            healthScript.playerStamina -= dashStaminaCost;
             
             fovTimer = (timer-fovTimer2)/fovChangeTime;
             if (fovTimer > 1)
@@ -107,12 +120,13 @@ public class PlayerMovement : MonoBehaviour
             isDashing = false;
         }
         
-        if (Input.GetKey(KeyCode.LeftShift) && canRun && !isDashing)
+        if (Input.GetKey(KeyCode.LeftShift) && canRun && !isDashing && healthScript.playerStamina >= runStaminaCost)
         {
             isRunning = true;
             isWalking = false;
             PLAYSOUND_Running = true;
             speed = runSpeed;
+            healthScript.playerStamina -= runStaminaCost;
 
             fovTimer = (timer-fovTimer2)/fovChangeTime;
             lastFOV = camera.fieldOfView;
@@ -178,14 +192,8 @@ public class PlayerMovement : MonoBehaviour
         moveVector = transform.TransformDirection(moveVector);
         moveVector = speed * moveVector;
         moveVector.y = rb.velocity.y;
-
         moveVector.y -= transform.position.y * 0.01f; // Fix dash into enemy jump takes too long to fall down again (kinda fix only)
-        
-        
         rb.velocity = moveVector;
-
-        
-        
         Debug.DrawRay(transform.position,moveVector,Color.red,0.5f);
     }
 
@@ -230,10 +238,31 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.DrawRay(transform.position,-transform.up, Color.blue,3);
             // JUMP FORCE
+            PLAYSOUND_Jump = true;
+            isJumping = true;
             jumpVector = new Vector3(0, jumpHeight, 0);
             rb.velocity += jumpVector;
-        
-            
+            StartCoroutine("PlayerJumpingLand");
         }
     }
+
+    /*IEnumerator PlayerJumpingLand()
+    {
+        if (transform.position.y < 1.2f && isGrounded)
+        {
+            isJumping = false;
+        }
+
+        yield return new WaitForSeconds(0);
+        
+        if (isJumping)
+        {
+            StartCoroutine("PlayerJumpingLand");
+        }
+        else
+        {
+            PLAYSOUND_JumpLand = true;
+        }
+    }
+    */
 }

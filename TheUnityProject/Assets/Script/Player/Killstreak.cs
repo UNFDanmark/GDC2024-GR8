@@ -8,14 +8,13 @@ public class Killstreak : MonoBehaviour
     private float killTimer = 0;
     public float streakRunOutTime = 2f;
     public int killStreak = 0;
+    KillStreakUI killStreakUI;
     
-    // Start is called before the first frame update
     void Start()
     {
-        
+        killStreakUI = GameObject.FindWithTag("StreakText").GetComponent<KillStreakUI>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
@@ -23,6 +22,8 @@ public class Killstreak : MonoBehaviour
         {
             killStreak = 0;
         }
+
+        killStreakUI.streak = killStreak;
     }
     public void Kill()
     {
