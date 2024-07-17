@@ -8,6 +8,7 @@ public class Score : MonoBehaviour
     private TMP_Text textComponent;
     public Killstreak killstreak;
     public Transform playerTransform;
+    public Leaderboards lb;
 
     public float score = 0;
     public float scoreMultiplier = 1;
@@ -22,6 +23,7 @@ public class Score : MonoBehaviour
     {
         scoreMultiplier = playerTransform.position.y * 0.25f * (1 + killstreak.killStreak * 0.1f)+.75f;
         textComponent.text = $"Score: {score:0000000}\n" +
-                             $"Multiplier: {scoreMultiplier:F1}x";
+                             $"Multiplier: {scoreMultiplier:F1}x" +
+                             $"HighScore: {PlayerPrefs.GetInt("#1",1)}";
     }
 }

@@ -1325,6 +1325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killstreak: {fileID: 1362273789}
   playerTransform: {fileID: 1362273782}
+  lb: {fileID: 0}
   score: 0
   scoreMultiplier: 1
 --- !u!114 &510302678
@@ -2681,8 +2682,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 294.71686, y: -99.04401}
-  m_SizeDelta: {x: 569.4432, y: 198.088}
+  m_AnchoredPosition: {x: 435, y: -99.04401}
+  m_SizeDelta: {x: 850, y: 198.088}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1262640174
 MonoBehaviour:
@@ -2698,6 +2699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killstreak: {fileID: 1362273789}
   playerTransform: {fileID: 1362273782}
+  lb: {fileID: 1362273793}
   score: 0
   scoreMultiplier: 1
 --- !u!114 &1262640175
@@ -3242,6 +3244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topScores: 
   topNames: []
+  inputName: 
   sc: {fileID: 1262640174}
   topWhat: 10
 --- !u!1 &1509219169
