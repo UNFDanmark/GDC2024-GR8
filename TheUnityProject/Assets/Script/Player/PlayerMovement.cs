@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (!isRunning && isGrounded && !isDashing)
+        if (!isRunning && isGrounded && !isDashing && healthScript.playerStamina <= healthScript.playerMaxStamina)
         {
             healthScript.playerStamina += staminaRegen;
         }
@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
             if (Math.Abs(dashFOV - camera.fieldOfView) < 1) camera.fieldOfView = dashFOV;
         }
         
-        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash && !isDashing)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash && !isDashing && healthScript.playerStamina >= dashStaminaCost)
         {
             dashTimer = timer;
             isDashing = true;
@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
             isDashing = false;
         }
         
-        if (Input.GetKey(KeyCode.LeftShift) && canRun && !isDashing)
+        if (Input.GetKey(KeyCode.LeftShift) && canRun && !isDashing && healthScript.playerStamina >= runStaminaCost)
         {
             isRunning = true;
             isWalking = false;
@@ -242,7 +242,6 @@ public class PlayerMovement : MonoBehaviour
             isJumping = true;
             jumpVector = new Vector3(0, jumpHeight, 0);
             rb.velocity += jumpVector;
-            StartCoroutine("PlayerJumpingLand");
         }
     }
 

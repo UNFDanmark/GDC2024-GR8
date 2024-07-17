@@ -21,6 +21,10 @@ public class ShotgunTrigger : MonoBehaviour
     public bool PLAYSOUND_BS_ShotgunShoot; // Note til Adam: Denne her bool vil blive sat til true i ÉN frame, og kun én, hver gang spilleren skydder.
     public bool PLAYSOUND_ShotgunReload;
 
+    public int selectedSpell;
+    // 0 = Buckshot
+    // 1 = Piercing Light
+
     void Start()
     {
     }
@@ -42,7 +46,14 @@ public class ShotgunTrigger : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && timer >= lastTimerTrigger + 0.2f)
         {
-            BuckshotShoot();
+            if (selectedSpell == 0)
+            {
+                BuckshotShoot();
+            }
+            else if (selectedSpell == 1)
+            {
+                
+            }
         }
         /*
         else if (timer >= lastTimerTrigger + 0.15f)
@@ -102,6 +113,21 @@ public class ShotgunTrigger : MonoBehaviour
             {
                 isReloading = true;
                 Reload();
+            }
+        }
+    }
+
+    public void PiercingLightShoot()
+    {
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(transform.position + (transform.forward * transform.localScale.z) / 1.5f,
+            transform.forward, Mathf.Infinity);
+        List<GameObject> enemyHitList;
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].collider.CompareTag("Enemy"))
+            {
+                //enemyHitList.Add(hits[i].collider);
             }
         }
     }
