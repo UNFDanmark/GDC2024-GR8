@@ -229,6 +229,111 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &128924704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 128924708}
+  - component: {fileID: 128924707}
+  - component: {fileID: 128924706}
+  - component: {fileID: 128924705}
+  m_Layer: 0
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!135 &128924705
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128924704}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &128924706
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128924704}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 034daf63f52034a4ab02fb01f5a487ee, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &128924707
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128924704}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &128924708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128924704}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.07532098, y: -0.8774909, z: -0.30932507, w: 0.35868445}
+  m_LocalPosition: {x: -24.295, y: 4.75, z: -18.639687}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -29.264, y: 230.804, z: -383.947}
 --- !u!1 &166876212
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BS_BulletCount: 18
   BS_Range: 13
+  BS_remainingAmmo: 2
   reloadSpeed: 2
   BS_BulletHitParticle: {fileID: 3410934234863709930, guid: 7186b5e618f5e254ab0e5e9c401f6aad,
     type: 3}
@@ -1186,6 +1292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 0}
   fovChangeTime: 1
+  staminaRegen: 0
   walkSettings: ----------------
   walkSpeed: 0.02
   walkFOV: 10
@@ -1198,6 +1305,7 @@ MonoBehaviour:
   isRunning: 0
   canRun: 1
   PLAYSOUND_Running: 0
+  runStaminaCost: 1
   dashSettings: ----------------
   dashSpeed: 20000
   dashFOV: 10
@@ -1205,12 +1313,14 @@ MonoBehaviour:
   isDashing: 0
   canDash: 1
   PLAYSOUND_DASH: 0
+  dashStaminaCost: 0
   jumpSettings: ----------------
   jumpHeight: 2
   canJump: 1
   PLAYSOUND_Jump: 0
   PLAYSOUND_JumpLand: 0
   isGrounded: 1
+  isJumping: 0
 --- !u!136 &1490658671
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1747,3 +1857,4 @@ SceneRoots:
   - {fileID: 1501114581}
   - {fileID: 1438581210}
   - {fileID: 923459652}
+  - {fileID: 128924708}
