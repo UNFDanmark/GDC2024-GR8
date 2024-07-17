@@ -10,6 +10,7 @@ public class AudioController : MonoBehaviour
     private bool WalkSoundHasPlayed = false;
     public AudioClip[] clipListPlayer;
     public AudioClip[] clipListShotgun;
+    public GameObject EmptyGameObjectOnPLayer;
 
     private Rigidbody PlayerRB;
     // 1. Footstep 
@@ -37,6 +38,13 @@ public class AudioController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        if (playerMovement.PLAYSOUND_DASH)
+        {
+            EmptyGameObjectOnPLayer.GetComponent<AudioSource>().PlayOneShot(clipListPlayer[4]);
+        }
+        
 
         if (Shotgun.GetComponent<ShotgunTrigger>().PLAYSOUND_BS_ShotgunShoot)
         {
@@ -68,13 +76,14 @@ public class AudioController : MonoBehaviour
         
         
         
-        if (PlayerRB.velocity.z != 0 && PlayerRB.velocity.x != 0 && WalkSoundHasPlayed == false)
+        if (PlayerRB.velocity.z > 0.05f && PlayerRB.velocity.x > 0.05f && WalkSoundHasPlayed == false)
         {
 
             PlayerAudioSource.clip = clipListPlayer[Random.Range(0, 2)]; 
             // Inserts a random clip from list into player audio source
             
             print("paasdsadsadasd");
+            print(PlayerRB.velocity);
 
 
             if (playerMovement.PLAYSOUND_Walking)
