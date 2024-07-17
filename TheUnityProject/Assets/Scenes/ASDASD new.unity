@@ -1045,7 +1045,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: abbd9bd27bcc1014487e611bc55288c0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1140,7 +1140,7 @@ Transform:
   m_GameObject: {fileID: 431858690}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.321563, y: -0.45157593, z: 10.984716}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2423,7 +2423,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2534,7 +2534,7 @@ Transform:
   m_GameObject: {fileID: 1142888761}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.138882, y: -1.3173895, z: -3.9584503}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2809,7 +2809,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d055cb413cd5daf43b1b2c70c964d667, type: 3}
   - {fileID: 8300000, guid: dec4f6e6b3898ea4eb8053bdbfa764e3, type: 3}
   - {fileID: 8300000, guid: 0c51888dab0ab9644a08185a8c15684a, type: 3}
-  - {fileID: 8300000, guid: ff1b7d999baccc445b93e80f51506cf0, type: 3}
+  - {fileID: 8300000, guid: 4494c326979ac014cbecefbaefd41821, type: 3}
   - {fileID: 8300000, guid: abbd9bd27bcc1014487e611bc55288c0, type: 3}
   ShotgunClipList:
   - {fileID: 8300000, guid: 9fd7499cd16ee5a43b9c519726a1ece8, type: 3}
