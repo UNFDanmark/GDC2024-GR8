@@ -22,8 +22,8 @@ public class EnemyCore : MonoBehaviour
     
     
     // Added traits
-    public int maxHealth = 10;
-    public int currentHealth;
+    public float maxHealth = 10;
+    public float currentHealth;
     public float speed = 0.1f;
     public float range = 2;
     public float damage = 5;
