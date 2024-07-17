@@ -10,12 +10,7 @@ public class StartMenuButtons : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void StartGame()
     {
@@ -24,7 +19,6 @@ public class StartMenuButtons : MonoBehaviour
 
     public void QuitGame()
     {
-        SceneManager.LoadScene("Tjalfe Test");
-        //Application.Quit();
+        Application.Quit();
     }
 }

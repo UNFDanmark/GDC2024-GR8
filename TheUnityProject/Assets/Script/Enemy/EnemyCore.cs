@@ -63,7 +63,7 @@ public class EnemyCore : MonoBehaviour
         enemyAI.speed = speed;
         if ((playerTransform.position - transform.position).magnitude <= range)
         {
-            transform.forward = new Vector3(playerTransform.position.x - transform.position.x,0,playerTransform.position.z - transform.position.z);
+            //transform.forward = new Vector3(playerTransform.position.x - transform.position.x,0,playerTransform.position.z - transform.position.z);
             enemyAnimator.SetTrigger("Attack");
             enemyAnimator.SetBool("IsRunning", false);
         }
@@ -71,7 +71,7 @@ public class EnemyCore : MonoBehaviour
         {
             enemyAnimator.SetTrigger("Attack");
             enemyAI.destination = transform.position;
-            transform.forward = (playerTransform.position - transform.position).normalized;
+            //transform.forward = (playerTransform.position - transform.position).normalized;
         }
         else
         {
