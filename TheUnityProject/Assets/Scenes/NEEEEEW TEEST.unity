@@ -909,7 +909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &459638423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,6 +930,7 @@ MonoBehaviour:
   timeBeforeStarting: 1
   amountPerWave: 4
   timeBetweenWaves: 3
+  PLAYSOUND_EnemySpawn: 0
 --- !u!65 &459638424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1569,6 +1570,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
+        type: 3}
+      propertyPath: EmptyGameObjectOnPLayer
+      value: 
+      objectReference: {fileID: 1670732784}
+    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
+        type: 3}
+      propertyPath: clipListPlayer.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
+        type: 3}
+      propertyPath: clipListPlayer.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: ff1b7d999baccc445b93e80f51506cf0, type: 3}
+    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
+        type: 3}
+      propertyPath: clipListPlayer.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: eab9ddccda72fc247bb6f4684b6ea779, type: 3}
     - target: {fileID: 7438273013698880781, guid: ccc79f696502fb948bf028210b88481f,
         type: 3}
       propertyPath: m_Name
@@ -1856,6 +1877,10 @@ MonoBehaviour:
     type: 3}
   PLAYSOUND_BS_ShotgunShoot: 0
   PLAYSOUND_ShotgunReload: 0
+  PLAYSOUND_PiercingLight: 0
+  PLAYSOUND_HitEnemy: 0
+  PL_damage: 15
+  PL_Ray: {fileID: 0}
   selectedSpell: 0
 --- !u!82 &1023354359
 AudioSource:
@@ -2583,6 +2608,7 @@ Transform:
   m_Children:
   - {fileID: 998425654}
   - {fileID: 1871106633}
+  - {fileID: 1670732785}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1362273783
@@ -2600,20 +2626,17 @@ MonoBehaviour:
   cameraObject: {fileID: 1871106630}
   fovChangeTime: 3
   staminaRegen: 0.17
-  walkSettings: --------------------------------
   walkSpeed: 12
   walkFOV: 60
   isWalking: 1
   canWalk: 1
   PLAYSOUND_Walking: 0
-  runSettings: --------------------------------
   runSpeed: 20
   runFOV: 75
   isRunning: 0
   canRun: 1
   PLAYSOUND_Running: 0
   runStaminaCost: 0.24
-  dashSettings: --------------------------------
   dashSpeed: 100
   dashFOV: 95
   dashtime: 0.1
@@ -2621,7 +2644,6 @@ MonoBehaviour:
   canDash: 1
   PLAYSOUND_DASH: 0
   dashStaminaCost: 26
-  jumpSettings: --------------------------------
   jumpHeight: 7
   canJump: 1
   PLAYSOUND_Jump: 0
@@ -3161,6 +3183,134 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1670732784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1670732785}
+  - component: {fileID: 1670732786}
+  m_Layer: 0
+  m_Name: DashAudioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1670732785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670732784}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.321563, y: -0.45157593, z: 10.984716}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1362273782}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1670732786
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670732784}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1793466006
 GameObject:
   m_ObjectHideFlags: 0
@@ -3687,6 +3837,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4521751606297834621, guid: 5420336d4b0976b47b0c4555b539e90a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
