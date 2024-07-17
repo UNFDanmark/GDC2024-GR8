@@ -111,7 +111,7 @@ public class SoundController : MonoBehaviour
         if (_playerMovement.PLAYSOUND_Jump)
         {
             DashAudioSource.PlayOneShot(PlayerClipList[3]);
-           
+           DashAudioSource.Play();
         }
 
         /*if (_playerRB.velocity.x <= 0.05f || _playerRB.velocity.z <= 0.05f)
