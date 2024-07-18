@@ -14,11 +14,11 @@ public class StartMenuButtons : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("!Main Scene");
+        SceneManager.LoadScene("InterMediary");
     }
 
     public void QuitGame()
     {
-        Application.Quit();
+        //Application.Quit();
     }
 }

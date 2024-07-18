@@ -739,6 +739,7 @@ MonoBehaviour:
   ammo1Opaque: {fileID: 0}
   ammo2Trans: {fileID: 0}
   ammo2Opaque: {fileID: 0}
+  killStreakBar: {fileID: 0}
 --- !u!1 &459638422
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +780,8 @@ MonoBehaviour:
   timeBeforeStarting: 1
   amountPerWave: 1
   timeBetweenWaves: 4
+  PLAYSOUND_EnemySpawn: 0
+  isFireball: 0
 --- !u!65 &459638424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1622,6 +1625,9 @@ MonoBehaviour:
   BS_BulletCount: 18
   BS_Range: 13
   BS_remainingAmmo: 2
+  PL_RemainingAmmo: 2
+  BS_DMG: 3
+  currentSpellRemainingAmmo: 0
   reloadSpeed: 2
   BS_BulletHitParticle: {fileID: 3410934234863709930, guid: 7186b5e618f5e254ab0e5e9c401f6aad,
     type: 3}
@@ -1629,6 +1635,12 @@ MonoBehaviour:
     type: 3}
   PLAYSOUND_BS_ShotgunShoot: 0
   PLAYSOUND_ShotgunReload: 0
+  PLAYSOUND_PiercingLight: 0
+  PLAYSOUND_HitEnemy: 0
+  PL_damage: 15
+  PL_Ray: {fileID: 0}
+  shotgunReloadAnimator: {fileID: 0}
+  selectedSpell: 0
 --- !u!82 &1023354359
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2073,20 +2085,17 @@ MonoBehaviour:
   cameraObject: {fileID: 1871106630}
   fovChangeTime: 3
   staminaRegen: 0
-  walkSettings: --------------------------------
   walkSpeed: 12
   walkFOV: 60
   isWalking: 1
   canWalk: 1
   PLAYSOUND_Walking: 0
-  runSettings: --------------------------------
   runSpeed: 20
   runFOV: 75
   isRunning: 0
   canRun: 1
   PLAYSOUND_Running: 0
   runStaminaCost: 1
-  dashSettings: --------------------------------
   dashSpeed: 100
   dashFOV: 95
   dashtime: 0.1
@@ -2094,7 +2103,6 @@ MonoBehaviour:
   canDash: 1
   PLAYSOUND_DASH: 0
   dashStaminaCost: 0
-  jumpSettings: --------------------------------
   jumpHeight: 7
   canJump: 1
   PLAYSOUND_Jump: 0
@@ -2153,6 +2161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd69f2c62f2db944920b4d7c59c45c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killStreakSlider: {fileID: 0}
+  timer: 0
+  killTimer: 0
   streakRunOutTime: 5
   killStreak: 0
 --- !u!114 &1362273790
@@ -2170,6 +2181,7 @@ MonoBehaviour:
   playerMaxHealth: 100
   playerHealth: 100
   healthBarSliderScale: 1
+  playerDied: 0
   playerMaxStamina: 50
   playerStamina: 50
   staminaBarSliderScale: 1
@@ -2345,7 +2357,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

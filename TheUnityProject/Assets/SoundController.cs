@@ -83,13 +83,18 @@ public class SoundController : MonoBehaviour
             }
 
         }
-        else
+        
+        if (_playerRB.velocity.z <= 0.5f && _playerRB.velocity.x <= 0.5f)
         {
             PlayerAudioSource.Stop();
             print("PLEASSEEE stay still");
-            WalkSoundHasPlayed = false;
-
+            WalkSoundHasPlayed = false;   
+            
         }
+        
+            
+
+        
 
 
         if (_ShotgunTrigger.PLAYSOUND_BS_ShotgunShoot)
@@ -111,7 +116,7 @@ public class SoundController : MonoBehaviour
         if (_playerMovement.PLAYSOUND_Jump)
         {
             DashAudioSource.PlayOneShot(PlayerClipList[3]);
-           
+           DashAudioSource.Play();
         }
 
         /*if (_playerRB.velocity.x <= 0.05f || _playerRB.velocity.z <= 0.05f)
