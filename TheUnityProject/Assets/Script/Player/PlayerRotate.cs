@@ -15,7 +15,7 @@ public class PlayerRotate : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         mouseX += Input.GetAxisRaw("Mouse X") * sensitivity;
         //transform.Rotate(0,mouseX,0);
