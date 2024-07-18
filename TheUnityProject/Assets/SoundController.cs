@@ -83,13 +83,18 @@ public class SoundController : MonoBehaviour
             }
 
         }
-        else
+        
+        if (_playerRB.velocity.z <= 0.5f && _playerRB.velocity.x <= 0.5f)
         {
             PlayerAudioSource.Stop();
             print("PLEASSEEE stay still");
-            WalkSoundHasPlayed = false;
-
+            WalkSoundHasPlayed = false;   
+            
         }
+        
+            
+
+        
 
 
         if (_ShotgunTrigger.PLAYSOUND_BS_ShotgunShoot)

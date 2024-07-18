@@ -2082,50 +2082,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
-        type: 3}
-      propertyPath: PlayerObject
-      value: 
-      objectReference: {fileID: 1362273778}
-    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
-        type: 3}
-      propertyPath: EmptyGameObjectOnPLayer
-      value: 
-      objectReference: {fileID: 431858690}
-    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
-        type: 3}
-      propertyPath: clipListPlayer.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
-        type: 3}
-      propertyPath: clipListPlayer.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: ff1b7d999baccc445b93e80f51506cf0, type: 3}
-    - target: {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f,
-        type: 3}
-      propertyPath: clipListPlayer.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: abbd9bd27bcc1014487e611bc55288c0, type: 3}
     - target: {fileID: 7438273013698880781, guid: ccc79f696502fb948bf028210b88481f,
         type: 3}
       propertyPath: m_Name
       value: AudioController
       objectReference: {fileID: 0}
-    - target: {fileID: 7438273013698880781, guid: ccc79f696502fb948bf028210b88481f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2646505525712228951, guid: ccc79f696502fb948bf028210b88481f, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7438273013698880781, guid: ccc79f696502fb948bf028210b88481f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1253935528}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccc79f696502fb948bf028210b88481f, type: 3}
 --- !u!1 &945745726
 GameObject:
@@ -2663,38 +2628,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1110, y: 2}
   m_SizeDelta: {x: 40, y: 110}
   m_Pivot: {x: 1, y: 0}
---- !u!1 &1253935525 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7438273013698880781, guid: ccc79f696502fb948bf028210b88481f,
-    type: 3}
-  m_PrefabInstance: {fileID: 942443130}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1253935528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1253935525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf421bf450ee9604da113bde5ce02a39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerObject: {fileID: 0}
-  ShotgunObject: {fileID: 0}
-  DashAudioSourceObject: {fileID: 0}
-  JumpAudioSourceObject: {fileID: 0}
-  PlayerClipList:
-  - {fileID: 8300000, guid: d055cb413cd5daf43b1b2c70c964d667, type: 3}
-  - {fileID: 8300000, guid: dec4f6e6b3898ea4eb8053bdbfa764e3, type: 3}
-  - {fileID: 8300000, guid: 0c51888dab0ab9644a08185a8c15684a, type: 3}
-  - {fileID: 8300000, guid: 4494c326979ac014cbecefbaefd41821, type: 3}
-  - {fileID: 8300000, guid: abbd9bd27bcc1014487e611bc55288c0, type: 3}
-  ShotgunClipList:
-  - {fileID: 8300000, guid: 9fd7499cd16ee5a43b9c519726a1ece8, type: 3}
-  - {fileID: 8300000, guid: 90624a9cacb5b0941bba23ef07682c3c, type: 3}
-  WalkSoundHasPlayed: 0
 --- !u!1 &1262640172
 GameObject:
   m_ObjectHideFlags: 0
