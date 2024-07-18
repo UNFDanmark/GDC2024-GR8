@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Leaderboards : MonoBehaviour
 {
     public int[] topScores;
     public string[] topNames;
+    
     public string inputName;
+    private int latestPosition;
 
     private PlayerHealth ph;
     private bool dieBool, testbool;
@@ -14,19 +17,35 @@ public class Leaderboards : MonoBehaviour
 
     public int topWhat = 10;
 
-    public void NewHighScore(int position)
+    public void RecieveRecordName(string name)
     {
-        topNames[position] = inputName;
+        topNames[latestPosition] = name;
+        SaveData();
+    }
+    public void NewHighScore()
+    {
     }
     public void SaveData()
     {
-        Debug.Log("Called save data");
+       Debug.Log("Called save data");
+       string scoreString = "";
         for (int i = 0; i < topWhat; i++)
         {
-            PlayerPrefs.SetInt("#"+(i+1),topScores[i]);
-            PlayerPrefs.SetString("#"+(i+1),topNames[i]);
+            if (scoreString.Length == 0)
+            {
+                scoreString += topScores[i];
+                continue;
+            }
+
+            scoreString += ", " + topScores[i];
+
+            // PlayerPrefs.SetInt("#"+(i+1),topScores[i]);
+            // PlayerPrefs.SetString("#"+(i+1),topNames[i]);
+
         }
-        PlayerPrefs.Save();
+        
+        File.WriteAllText("/Assets/Script/scoresfolder/topscore.txt",scoreString);
+      
     }
 
     public void ClearData()
@@ -41,6 +60,14 @@ public class Leaderboards : MonoBehaviour
 
     public void LoadData()
     {
+        string scoreStringWithCommas = File.ReadAllText("/Assets/Script/scoresfolder/topscore.txt");
+        string[] stringScores = scoreStringWithCommas.Split(",");
+
+        for (int i = 0; i < stringScores.Length; i++)
+        {
+            topScores[i] = int.Parse(stringScores[i]);
+        }
+        
         topScores = new int[topWhat];
         topNames = new string[topWhat];
         for (int i = 0; i<topWhat; i++)
@@ -81,14 +108,16 @@ public class Leaderboards : MonoBehaviour
                 {
                     MoveScoreDown(i);
                     topScores[i] = tempScore;
-                    NewHighScore(i);
+                    NewHighScore();
+                    latestPosition = i;
                 }
 
                 if (tempScore > topScores[0])
                 {
                     MoveScoreDown(0);
                     topScores[0] = tempScore;
-                    NewHighScore(0);
+                    NewHighScore();
+                    latestPosition = 0;
                 }
             }
             SaveData();
@@ -100,6 +129,7 @@ public class Leaderboards : MonoBehaviour
         for (int i = topWhat-1; i > index; i--)
         {
             topScores[i] = topScores[i - 1];
+            topNames[i] = topNames[i - 1];
         }
     }
 }

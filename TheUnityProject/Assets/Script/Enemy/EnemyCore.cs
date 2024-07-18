@@ -59,6 +59,11 @@ public class EnemyCore : MonoBehaviour
             score.score += scoreBaseValue * score.scoreMultiplier;
             Destroy(gameObject);
         }
+
+        if (timer >= 120)
+        {
+            Destroy(gameObject);
+        }
         
         enemyAI.speed = speed;
         if ((playerTransform.position - transform.position).magnitude <= range)
