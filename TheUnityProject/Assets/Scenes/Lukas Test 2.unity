@@ -1326,6 +1326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killstreak: {fileID: 1362273789}
   playerTransform: {fileID: 1362273782}
+  lb: {fileID: 0}
   score: 0
   scoreMultiplier: 1
 --- !u!114 &510302678
@@ -2683,8 +2684,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 294.71686, y: -99.04401}
-  m_SizeDelta: {x: 569.4432, y: 198.088}
+  m_AnchoredPosition: {x: 435, y: -99.04401}
+  m_SizeDelta: {x: 850, y: 198.088}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1262640174
 MonoBehaviour:
@@ -2700,6 +2701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killstreak: {fileID: 1362273789}
   playerTransform: {fileID: 1362273782}
+  lb: {fileID: 1362273793}
   score: 0
   scoreMultiplier: 1
 --- !u!114 &1262640175
@@ -2729,9 +2731,7 @@ MonoBehaviour:
   m_fontAsset: {fileID: 11400000, guid: db7a24578a7030b4aa3824db2c44ceb0, type: 2}
   m_sharedMaterial: {fileID: -3727792487983529121, guid: db7a24578a7030b4aa3824db2c44ceb0,
     type: 2}
-  m_fontSharedMaterials:
-  - {fileID: -3727792487983529121, guid: db7a24578a7030b4aa3824db2c44ceb0, type: 2}
-  - {fileID: 0}
+  m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3301,7 +3301,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
