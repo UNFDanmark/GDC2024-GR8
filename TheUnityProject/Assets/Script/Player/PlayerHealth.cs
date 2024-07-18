@@ -35,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
         {
             deathScreen.SetActive(true);
             playerDied = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         if (Input.GetKeyDown(KeyCode.U)) playerHealth++;
