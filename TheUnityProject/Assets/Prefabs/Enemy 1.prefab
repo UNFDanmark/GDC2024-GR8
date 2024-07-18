@@ -226,7 +226,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 503
+    m_Bits: 14839
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   enemyAnimator: {fileID: 8591695178500902097}
   maxHealth: 100
   currentHealth: 100
-  speed: 30
+  speed: 20
   range: 5
   damage: 10
   scoreBaseValue: 100
@@ -1091,9 +1091,9 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 3.5
+  m_Acceleration: 35
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 300
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

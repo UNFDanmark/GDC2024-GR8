@@ -38,6 +38,14 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 position = spawnArea.position;
+        Vector3 scale = spawnArea.localScale;
+        
+        corner1.z = position.z + scale.z/2;
+        corner1.x = position.x + scale.x/2;
+        
+        corner2.z = position.z - scale.z/2;
+        corner2.x = position.x - scale.x/2;
         PLAYSOUND_EnemySpawn = false;
         if (enableSpawner) timer += Time.deltaTime;
 

@@ -405,7 +405,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.036666665
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 1f73543258a1ab34681850e3fdb2ff87, type: 2}
   m_BuildHeightMesh: 0
@@ -1165,7 +1165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &459638423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1326,6 +1326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killstreak: {fileID: 1362273789}
   playerTransform: {fileID: 1362273782}
+  lb: {fileID: 0}
   score: 0
   scoreMultiplier: 1
 --- !u!114 &510302678
@@ -1559,7 +1560,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.036666665
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 70f3e5ebce41ec940b914a429b5f1fbb, type: 2}
   m_BuildHeightMesh: 0
@@ -2681,6 +2682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   killstreak: {fileID: 1362273789}
   playerTransform: {fileID: 1362273782}
+  lb: {fileID: 0}
   score: 0
   scoreMultiplier: 1
 --- !u!114 &1262640175
