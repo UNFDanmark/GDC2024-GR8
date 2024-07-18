@@ -25,10 +25,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        if (playerDied && Input.GetKeyDown(KeyCode.Return))
-        {
-            SceneManager.LoadScene("Main Menu");
-        }
         healthBarSliderScale = playerHealth / playerMaxHealth;
         staminaBarSliderScale = playerStamina / playerMaxStamina;
         if (playerHealth <= 0)

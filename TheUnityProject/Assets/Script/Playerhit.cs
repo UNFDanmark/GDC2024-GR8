@@ -16,7 +16,7 @@ public class Playerhit : MonoBehaviour
     {
         Debug.Log(playerHealth);
         Debug.Log(other);
-        Debug.Log(other.gameObject.GetComponent<EnemyWeapon>().damage);
+//        Debug.Log(other.gameObject.GetComponent<EnemyWeapon>().damage);
         playerHealth.playerHealth -= other.gameObject.GetComponent<EnemyWeapon>().damage;
     }
 }
